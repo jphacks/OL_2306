@@ -14,14 +14,11 @@ type TweetType = {
   user_id: number;
   user_name: string;
   type: 'tweet' | 'model' | 'camera';
-  // 他のプロパティがあればこちらに追加してください
 };
 
 export const HomeCon: FC = () => {
   const [timeline, setTimeline] = useState<Array<TweetType>>([]);
-  const [filteredType, setFilteredType] = useState<
-    'tweet' | 'model' | 'camera'
-  >('tweet');
+  const [filteredType, setFilteredType] = useState<TweetType['type']>('tweet');
 
   useEffect(() => {
     async function fetchTimeline() {
