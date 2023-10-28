@@ -2,6 +2,7 @@ import type { FC, ChangeEvent, FormEvent } from 'react';
 import { SignupPre } from '../Presentational/SignupPre';
 import { useState } from 'react';
 import { useRouter } from "next/router";
+import axios from 'axios';
 
 export interface FormValues {
   username: string,
@@ -23,25 +24,20 @@ export const SignupCon:FC = () => {
     setFormValues({ ...formValues, [name]: value })
   }
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const postData = {
+    "user_name": formValues.username,
+    "email": formValues.email,
+    "password": formValues.password
+  }
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    try {
       e.preventDefault();
-      fetch('/api/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(
-          {
-            "user_name": formValues.username,
-            "email": formValues.email,
-            "password": formValues.password,
-          }
-        )
-      }).then(() => {
-        router.push('/');  
-      }).catch((error) => {
-        console.log(error);
-      })
+      await axios.post('/api/signup', postData)
+      router.push('/');  
+    } catch(e) {
+      console.log(e)
+    }
   }
 
   return <SignupPre handleChange={handleChange} handleSubmit={handleSubmit} formValues={formValues} />;
