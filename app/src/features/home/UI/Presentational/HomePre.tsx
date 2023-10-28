@@ -51,13 +51,14 @@ export const HomePre: FC<HomePreProps> = ({ count, handleClick }) => {
         <ModalContent>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            <FormControl>
-              <FormLabel>タイプ</FormLabel>
+            <FormControl w="40%">
               <Select
                 value={type}
                 onChange={(e) =>
                   setType(e.target.value as "tweet" | "model" | "camera")
                 }
+                borderRadius="40px"
+                borderColor="black"
               >
                 <option value="tweet">つぶやき</option>
                 <option value="model">モデル募集</option>
@@ -66,10 +67,15 @@ export const HomePre: FC<HomePreProps> = ({ count, handleClick }) => {
             </FormControl>
 
             <FormControl mt={4}>
-              <FormLabel>内容</FormLabel>
               <Textarea
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
+                border="none"
+                placeholder="今何してる？"
+                _placeholder={{ color: "gray.400" }}
+                resize="vertical"
+                fontSize="20px"
+                h="200px"
               />
             </FormControl>
           </ModalBody>
