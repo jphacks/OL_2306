@@ -5,18 +5,24 @@ type DataResponse = {
   message: string;
 };
 
-type TweetRequest = {
+type Tweet = {
   userId: string;
   content: string;
   type: "tweet" | "model" | "camera";
 };
 
+// この配列は仮のデータ
+const mockTweets: Tweet[] = [
+  { userId: "1", content: "First tweet", type: "tweet" },
+  { userId: "2", content: "Second tweet", type: "tweet" },
+];
+
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<DataResponse>
+  res: NextApiResponse<DataResponse | Tweet[]>
 ) {
   if (req.method === "POST") {
-    const { userId, content, type }: TweetRequest = req.body;
+    const { userId, content, type }: Tweet = req.body;
 
     if (!userId || !content || !type) {
       return res.status(400).json({
@@ -36,6 +42,9 @@ export default function handler(
       success: true,
       message: "Data processed successfully",
     });
+  } else if (req.method === "GET") {
+    // 仮のデータ
+    return res.status(200).json(mockTweets);
   }
 
   return res.status(405).json({
