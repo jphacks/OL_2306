@@ -41,13 +41,22 @@ export const HomePre: FC<HomePreProps> = ({
           {filteredTimeline.map((item) => (
             <Box
               key={item.id}
-              w="calc(25% - 1rem)"
-              mb={4}
+              w="25%"
               p={4}
               boxShadow="sm"
               borderWidth="1px"
-              borderRadius="lg"
+              borderRadius="5px"
             >
+              <Box
+                bg="gray.300"
+                w="100%"
+                h="150px"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
+                画像
+              </Box>
               <p>{item.user_name}</p>
               <p>{item.content}</p>
             </Box>
