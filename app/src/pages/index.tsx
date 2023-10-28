@@ -1,5 +1,4 @@
 import { HomeCon } from '@/features/home/UI/Container/HomeCon';
-import { Heading } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
