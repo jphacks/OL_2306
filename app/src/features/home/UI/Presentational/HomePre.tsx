@@ -1,23 +1,39 @@
-import { Layout } from '@/application/UI/Components/layout';
-import { Box, Button, Heading } from '@chakra-ui/react';
-import type { FC } from 'react';
+import { Layout } from "@/application/UI/Components/layout";
+import { Box, Button, Heading } from "@chakra-ui/react";
+import { FC, useState } from "react";
 
-// 関数と変数をPresentationalに渡すために型を記述する
 interface HomePreProps {
-    count : number,
-    handleClick : () => void
+  timeline: Array<any>;
+  filteredType: "tweet" | "model" | "camera";
+  setFilteredType: (type: "tweet" | "model" | "camera") => void;
 }
 
-/**
- * Presentational（画面のUIを記述する）
- * @returns 
- */
-export const HomePre:FC<HomePreProps> = ({ count, handleClick }) => {
-  return <Layout title='フォトマ'>
-    <Heading>ホーム画面</Heading>
-    <Box>
-      <Box>カウント：{count}</Box>
-      <Button onClick={handleClick}>クリック！！</Button>
-    </Box>
-  </Layout>;
+export const HomePre: FC<HomePreProps> = ({
+  timeline,
+  filteredType,
+  setFilteredType,
+}) => {
+  const filteredTimeline = timeline.filter(
+    (item) => item.type === filteredType
+  );
+
+  return (
+    <Layout title="フォトマ">
+      <Heading>ホーム画面</Heading>
+      <Box>
+        <Button onClick={() => setFilteredType("tweet")}>つぶやき</Button>
+        <Button onClick={() => setFilteredType("model")}>モデル募集</Button>
+        <Button onClick={() => setFilteredType("camera")}>撮影者募集</Button>
+      </Box>
+      <Box>
+        {filteredTimeline.map((item) => (
+          <Box key={item.id}>
+            <p>{item.user_id}</p>
+            <p>{item.content}</p>
+            <p>{item.post_date}</p>
+          </Box>
+        ))}
+      </Box>
+    </Layout>
+  );
 };
