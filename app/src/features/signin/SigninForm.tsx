@@ -3,7 +3,7 @@ import { Flex, Stack, Box, Button, Text, Input, FormControl, FormLabel } from '@
 import { Layout } from '@/application/UI/Components/layout';
 import Link from 'next/link';
 
-export const Form:FC = () => {
+export const SigninForm:FC = () => {
   return <>
     <Layout title="フォトマ">
       <Flex
