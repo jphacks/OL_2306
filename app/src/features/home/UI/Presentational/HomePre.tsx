@@ -1,5 +1,5 @@
 import { Layout } from '@/application/UI/Components/layout';
-import { Box, Flex, Text } from '@chakra-ui/react';
+import { Box, Flex, Grid, Text } from '@chakra-ui/react';
 import type { FC } from 'react';
 
 interface HomePreProps {
@@ -55,11 +55,11 @@ export const HomePre: FC<HomePreProps> = ({
             撮影者募集
           </Text>
         </Flex>
-        <Flex wrap="wrap" justify="flex-start">
+        <Grid templateColumns="repeat(4, 1fr)" gap={4}>
           {filteredTimeline.map((item) => (
             <Box
               key={item.id}
-              w="25%"
+              w="100%"
               p={4}
               boxShadow="sm"
               borderWidth="1px"
@@ -79,7 +79,7 @@ export const HomePre: FC<HomePreProps> = ({
               <p>{item.content}</p>
             </Box>
           ))}
-        </Flex>
+        </Grid>
       </Box>
     </Layout>
   );
