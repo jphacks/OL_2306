@@ -28,7 +28,7 @@ export default async function handler(
       return;
     }
 
-    // description と icon_path は NULL の場合　空文字に変換
+    // description と icon_path は NULL の場合空文字に変換
     if (!description) {
       description = '';
     }
