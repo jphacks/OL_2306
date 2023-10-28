@@ -13,7 +13,7 @@ import {
   ModalOverlay,
   Textarea,
 } from "@chakra-ui/react";
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 
 interface HomePreProps {
   isOpen: boolean;
