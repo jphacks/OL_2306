@@ -19,7 +19,12 @@ interface HomePreProps {
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
-  onSubmit: (content: string, type: string) => void;
+  handlePost: (content: string, type: string) => void;
+  content: string;
+  setContent: (value: string) => void;
+  type: "tweet" | "model" | "camera";
+  setType: (value: "tweet" | "model" | "camera") => void;
+  getLabelForType: (type: string) => string;
 }
 
 /**
@@ -30,31 +35,13 @@ export const HomePre: FC<HomePreProps> = ({
   isOpen,
   onOpen,
   onClose,
-  onSubmit,
+  handlePost,
+  content,
+  setContent,
+  type,
+  setType,
+  getLabelForType,
 }) => {
-  const [content, setContent] = useState("");
-  const [type, setType] = useState<"tweet" | "model" | "camera">("tweet");
-
-  const handlePost = () => {
-    onSubmit(content, type);
-    setContent("");
-    setType("tweet");
-  };
-
-  //typeを日本語に変換するヘルパー関数
-  const getLabelForType = (type: string) => {
-    switch (type) {
-      case "tweet":
-        return "つぶやき";
-      case "model":
-        return "モデル募集";
-      case "camera":
-        return "撮影者募集";
-      default:
-        return type;
-    }
-  };
-
   return (
     <Layout title="フォトマ">
       <Button position="fixed" right="1rem" bottom="1rem" onClick={onOpen}>
@@ -102,7 +89,7 @@ export const HomePre: FC<HomePreProps> = ({
           </ModalBody>
           <Button
             mt={4}
-            onClick={handlePost}
+            onClick={() => handlePost(content, type)}
             w="20%"
             ml="auto"
             mr="10px"

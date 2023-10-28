@@ -3,9 +3,12 @@ import { HomePre } from "../Presentational/HomePre";
 
 export const HomeCon: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [content, setContent] = useState("");
+  const [type, setType] = useState<"tweet" | "model" | "camera">("tweet");
 
   const onClose = () => {
     setIsOpen(false);
+    setType("tweet");
   };
 
   const onOpen = () => {
@@ -31,8 +34,24 @@ export const HomeCon: FC = () => {
       }
 
       onClose();
+      setContent("");
+      setType("tweet");
     } catch (error) {
       console.error("An error occurred:", error);
+    }
+  };
+
+  //typeを日本語に変換するヘルパー関数
+  const getLabelForType = (type: string) => {
+    switch (type) {
+      case "tweet":
+        return "つぶやき";
+      case "model":
+        return "モデル募集";
+      case "camera":
+        return "撮影者募集";
+      default:
+        return type;
     }
   };
 
@@ -41,7 +60,12 @@ export const HomeCon: FC = () => {
       isOpen={isOpen}
       onOpen={onOpen}
       onClose={onClose}
-      onSubmit={handlePost}
+      handlePost={handlePost}
+      content={content}
+      setContent={setContent}
+      type={type}
+      setType={setType}
+      getLabelForType={getLabelForType}
     />
   );
 };
