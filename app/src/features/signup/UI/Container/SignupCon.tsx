@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { ChangeEvent, FC } from 'react';
+import type { ChangeEvent, FC, FormEvent } from 'react';
 import { SignupPre } from '../Presentational/SignupPre';
 
 export interface FormValues {
@@ -20,5 +20,31 @@ export const SignupCon:FC = () => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value })
   }
-  return <SignupPre handleChange={handleChange} formValues={formValues} />;
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      console.log(formValues);
+      fetch('/api/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(
+          {
+            "user_name": formValues.username,
+            "email": formValues.email,
+            "password": formValues.password,
+          }
+        )
+      }).then((res) => {
+        console.log(res);
+        res.json().then((json) => {
+          console.log(json);
+        })
+      }).catch((error) => {
+        console.log(error);
+      })
+  }
+
+  return <SignupPre handleChange={handleChange} handleSubmit={handleSubmit} formValues={formValues} />;
 };

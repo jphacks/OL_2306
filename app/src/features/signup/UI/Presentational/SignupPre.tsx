@@ -1,21 +1,21 @@
 import type { ChangeEvent, FC } from 'react';
 import { Flex, Stack, Box, Button, Text, Input, FormControl, FormLabel } from '@chakra-ui/react';
-import axios from 'axios';
 import { Layout } from '@/application/UI/Components/layout';
 import Link from 'next/link';
 import { FormValues } from '../Container/SignupCon';
 
 // 関数と変数をPresentationalに渡すために型を記述する
 interface SignupPreProps {
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void
-  formValues: FormValues
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  formValues: FormValues;
 }
 
 /**
  * Presentational（サインアップ画面のUIを記述する）
  * @returns 
  */
-export const SignupPre:FC<SignupPreProps> = ({ handleChange, formValues }) => {
+export const SignupPre:FC<SignupPreProps> = ({ handleChange,  handleSubmit, formValues }) => {
   
   return <>
     <Layout title="フォトマ">
@@ -29,30 +29,7 @@ export const SignupPre:FC<SignupPreProps> = ({ handleChange, formValues }) => {
           p={10}
           w={600}
         >
-          <form onSubmit={(e) => {
-            e.preventDefault();
-            console.log(formValues);
-            fetch('/api/signup', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(
-                {
-                  "user_name": formValues.username,
-                  "email": formValues.email,
-                  "password": formValues.password,
-                }
-              )
-            }).then((res) => {
-              console.log(res);
-              res.json().then((json) => {
-                console.log(json);
-              })
-            }).catch((error) => {
-              console.log(error);
-            })
-          }}>
+          <form onSubmit={handleSubmit}>
             <Stack spacing={8}>
               <FormControl>
                 <FormLabel>ユーザー名</FormLabel>
