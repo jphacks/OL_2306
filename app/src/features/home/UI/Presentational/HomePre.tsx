@@ -1,4 +1,4 @@
-import { Layout } from "@/application/UI/Components/layout";
+import { Layout } from '@/application/UI/Components/layout';
 import {
   Button,
   FormControl,
@@ -12,8 +12,9 @@ import {
   ModalContent,
   ModalOverlay,
   Textarea,
-} from "@chakra-ui/react";
-import React, { FC } from "react";
+} from '@chakra-ui/react';
+import type { FC } from 'react';
+import React from 'react';
 
 interface HomePreProps {
   isOpen: boolean;
@@ -22,8 +23,8 @@ interface HomePreProps {
   handlePost: (content: string, type: string) => void;
   content: string;
   setContent: (value: string) => void;
-  type: "tweet" | "model" | "camera";
-  setType: (value: "tweet" | "model" | "camera") => void;
+  type: 'tweet' | 'model' | 'camera';
+  setType: (value: 'tweet' | 'model' | 'camera') => void;
   getLabelForType: (type: string) => string;
 }
 
@@ -60,16 +61,16 @@ export const HomePre: FC<HomePreProps> = ({
                 transition="all 0.2s"
                 borderRadius="md"
                 borderWidth="1px"
-                _hover={{ bg: "gray.400" }}
-                _expanded={{ bg: "blue.400" }}
-                _focus={{ boxShadow: "outline" }}
+                _hover={{ bg: 'gray.400' }}
+                _expanded={{ bg: 'blue.400' }}
+                _focus={{ boxShadow: 'outline' }}
               >
                 {getLabelForType(type)}
               </MenuButton>
               <MenuList>
-                <MenuItem onClick={() => setType("tweet")}>つぶやき</MenuItem>
-                <MenuItem onClick={() => setType("model")}>モデル募集</MenuItem>
-                <MenuItem onClick={() => setType("camera")}>
+                <MenuItem onClick={() => setType('tweet')}>つぶやき</MenuItem>
+                <MenuItem onClick={() => setType('model')}>モデル募集</MenuItem>
+                <MenuItem onClick={() => setType('camera')}>
                   撮影者募集
                 </MenuItem>
               </MenuList>
@@ -77,23 +78,23 @@ export const HomePre: FC<HomePreProps> = ({
             <FormControl mt={4}>
               <Textarea
                 value={content}
-                onChange={(e) => setContent(e.target.value)}
                 border="none"
                 placeholder="今何してる？"
-                _placeholder={{ color: "gray.400" }}
+                _placeholder={{ color: 'gray.400' }}
                 resize="vertical"
                 fontSize="20px"
                 h="200px"
+                onChange={(e) => setContent(e.target.value)}
               />
             </FormControl>
           </ModalBody>
           <Button
             mt={4}
-            onClick={() => handlePost(content, type)}
             w="20%"
             ml="auto"
             mr="10px"
             mb="10px"
+            onClick={() => handlePost(content, type)}
           >
             投稿
           </Button>
