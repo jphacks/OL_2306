@@ -46,22 +46,6 @@ export default async function handler(
         error: error,
       });
     }
-  } else if (req.method === 'GET') {
-    try {
-      const result = await connection.query('SELECT * FROM tweet');
-
-      res
-        .status(200)
-        .json({
-          message: 'Data acquisition was successful.',
-          tweets: result[0],
-        });
-    } catch (error) {
-      res.status(500).json({
-        massage: 'Failed to retrieve data.',
-        error: error,
-      });
-    }
   }
 
   return res.status(405).json({
