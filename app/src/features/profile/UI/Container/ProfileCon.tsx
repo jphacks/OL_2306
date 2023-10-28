@@ -27,11 +27,11 @@ export const ProfileCon: FC<ProfileConProps> = ({ userId: uid }) => {
     catch (err) {
       console.log("profile 取得失敗", err);
     }
-  }
+  };
 
   useEffect(() => {
     getUserInfo(userId);
-  }, []);
+  }, [userId]);
 
   // follow数、follower数は とりあえず仮で1100, 100
   return <ProfilePre userInfo={userInfo} userFollowed={1100} userFollower={100} />;
