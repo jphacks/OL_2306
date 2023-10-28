@@ -2,12 +2,15 @@ import { Layout } from "@/application/UI/Components/layout";
 import {
   Button,
   FormControl,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
   ModalOverlay,
-  Select,
   Textarea,
 } from "@chakra-ui/react";
 import React, { FC, useState } from "react";
@@ -38,6 +41,20 @@ export const HomePre: FC<HomePreProps> = ({
     setType("tweet");
   };
 
+  //typeを日本語に変換するヘルパー関数
+  const getLabelForType = (type: string) => {
+    switch (type) {
+      case "tweet":
+        return "つぶやき";
+      case "model":
+        return "モデル募集";
+      case "camera":
+        return "撮影者募集";
+      default:
+        return type;
+    }
+  };
+
   return (
     <Layout title="フォトマ">
       <Button position="fixed" right="1rem" bottom="1rem" onClick={onOpen}>
@@ -49,21 +66,27 @@ export const HomePre: FC<HomePreProps> = ({
         <ModalContent>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            <FormControl w="40%">
-              <Select
-                value={type}
-                onChange={(e) =>
-                  setType(e.target.value as "tweet" | "model" | "camera")
-                }
-                borderRadius="40px"
-                borderColor="black"
+            <Menu>
+              <MenuButton
+                px={4}
+                py={2}
+                transition="all 0.2s"
+                borderRadius="md"
+                borderWidth="1px"
+                _hover={{ bg: "gray.400" }}
+                _expanded={{ bg: "blue.400" }}
+                _focus={{ boxShadow: "outline" }}
               >
-                <option value="tweet">つぶやき</option>
-                <option value="model">モデル募集</option>
-                <option value="camera">撮影者募集</option>
-              </Select>
-            </FormControl>
-
+                {getLabelForType(type)}
+              </MenuButton>
+              <MenuList>
+                <MenuItem onClick={() => setType("tweet")}>つぶやき</MenuItem>
+                <MenuItem onClick={() => setType("model")}>モデル募集</MenuItem>
+                <MenuItem onClick={() => setType("camera")}>
+                  撮影者募集
+                </MenuItem>
+              </MenuList>
+            </Menu>
             <FormControl mt={4}>
               <Textarea
                 value={content}
@@ -77,8 +100,15 @@ export const HomePre: FC<HomePreProps> = ({
               />
             </FormControl>
           </ModalBody>
-          <Button mt={4} onClick={handlePost}>
-            送信
+          <Button
+            mt={4}
+            onClick={handlePost}
+            w="20%"
+            ml="auto"
+            mr="10px"
+            mb="10px"
+          >
+            投稿
           </Button>
         </ModalContent>
       </Modal>
