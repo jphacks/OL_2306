@@ -29,6 +29,8 @@ export const HomeCon: FC = () => {
       } else {
         console.error("Error posting tweet:", data.message);
       }
+
+      onClose();
     } catch (error) {
       console.error("An error occurred:", error);
     }
