@@ -2,7 +2,7 @@
 create table users (
     id int auto_increment primary key, -- id（主キー）
     user_name varchar(255) not null, -- ユーザー名（一意キーにしても良い）
-    email varchar(255) not null, -- メールアドレス（同じく一意キーにしても良い）
+    email varchar(255) not null unique, -- メールアドレス（同じく一意キーにしても良い）
     password varchar(255) not null, -- パスワード（ハッシュ化してもそのままでも良し）
     description varchar(255) default '', -- 説明
     icon_path varchar(255) default '' -- アイコン画像のパス
@@ -12,7 +12,7 @@ create table users (
 insert into users (user_name, email, password, icon_path) values 
 ('hoge', 'hoge@email.com', SHA2('password', 256), ''), -- パスワードをハッシュ化して保存
 ('fuga', 'fuga@email.com', 'password', '/public/image/icon/02.png'), -- アイコンのURL保存する場合
-('fuga', 'fuga@email.com', 'password', '');
+('foo', 'foo@email.com', 'password', '');
 
 -- ユーザーのポートフォリオ画像テーブル
 create table user_portfolios (
