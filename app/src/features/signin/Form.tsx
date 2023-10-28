@@ -25,7 +25,7 @@ export const Form:FC = () => {
             <FormLabel>パスワード</FormLabel>
             <Input type={'password'} placeholder={'パスワード'} />
           </FormControl>
-          <Link href={'./signup'}><Text color={'blue.400'} p={1}>新規登録へ</Text></Link>
+          <Link href={'/signup'}><Text color={'blue.400'} p={1}>新規登録へ</Text></Link>
           <Button
             bg={'blue.400'}
             color={'whiteAlpha.900'}
