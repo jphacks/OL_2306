@@ -24,23 +24,25 @@ export const SigninPre:FC<SigninPreProps> = ({}) => {
           p={10}
           w={600}
         >
-          <Stack spacing={8}>
-            <FormControl>
-              <FormLabel>メールアドレス</FormLabel>
-              <Input type="email" placeholder="メールアドレス" />
-            </FormControl>
-            <FormControl>
-              <FormLabel>パスワード</FormLabel>
-              <Input type="password" placeholder="パスワード" />
-            </FormControl>
-            <Link href="/signup"><Text color="blue.400" p={1}>新規登録へ</Text></Link>
-            <Button
-              bg="blue.400"
-              color="whiteAlpha.900"
-              type="submit"
-            >ログイン
-            </Button>
-          </Stack>
+          <form>
+            <Stack spacing={8}>
+              <FormControl>
+                <FormLabel>メールアドレス</FormLabel>
+                <Input type="email" placeholder="メールアドレス" />
+              </FormControl>
+              <FormControl>
+                <FormLabel>パスワード</FormLabel>
+                <Input type="password" placeholder="パスワード" />
+              </FormControl>
+              <Link href="/signup"><Text color="blue.400" p={1}>新規登録へ</Text></Link>
+              <Button
+                bg="blue.400"
+                color="whiteAlpha.900"
+                type="submit"
+              >ログイン
+              </Button>
+            </Stack>
+          </form>
         </Box>
       </Flex>
     </Layout>
