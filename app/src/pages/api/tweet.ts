@@ -1,9 +1,5 @@
+import mysql_connection from "@/application/lib/db/connect_db";
 import type { NextApiRequest, NextApiResponse } from "next";
-
-type DataResponse = {
-  success: boolean;
-  message: string;
-};
 
 type Tweet = {
   userId: string;
@@ -11,16 +7,13 @@ type Tweet = {
   type: "tweet" | "model" | "camera";
 };
 
-// この配列は仮のデータ
-const mockTweets: Tweet[] = [
-  { userId: "1", content: "First tweet", type: "tweet" },
-  { userId: "2", content: "Second tweet", type: "tweet" },
-];
-
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<DataResponse | Tweet[]>
+  res: NextApiResponse
 ) {
+  // mysqlと接続
+  const connection = await mysql_connection();
+
   if (req.method === "POST") {
     const { userId, content, type }: Tweet = req.body;
 
@@ -38,13 +31,34 @@ export default function handler(
       });
     }
 
-    return res.status(200).json({
-      success: true,
-      message: "Data processed successfully",
-    });
+    try {
+      const result = await connection.query(
+        "INSERT INTO tweet (user_id, content, type) VALUES (?, ?, ?)",
+        [userId, content, type]
+      );
+
+      res
+        .status(200)
+        .json({ message: "データが正常に格納されました。", result });
+    } catch (error) {
+      res.status(500).json({
+        message: "データの追加に失敗しました。",
+        error: error,
+      });
+    }
   } else if (req.method === "GET") {
-    // 仮のデータ
-    return res.status(200).json(mockTweets);
+    try {
+      const result = await connection.query("SELECT * FROM tweet");
+
+      res
+        .status(200)
+        .json({ message: "データの取得に成功しました。", tweets: result[0] });
+    } catch (error) {
+      res.status(500).json({
+        massage: "データの取得に失敗しました。",
+        error: error,
+      });
+    }
   }
 
   return res.status(405).json({
