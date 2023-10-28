@@ -3,7 +3,15 @@ import { Flex, Stack, Box, Button, Text, Input, FormControl, FormLabel } from '@
 import { Layout } from '@/application/UI/Components/layout';
 import Link from 'next/link';
 
-export const SignupForm:FC = () => {
+// 関数と変数をPresentationalに渡すために型を記述する
+interface SigninPreProps {
+}
+
+/**
+ * Presentational（サインイン画面のUIを記述する）
+ * @returns 
+ */
+export const SigninPre:FC<SigninPreProps> = ({}) => {
   return <>
     <Layout title="フォトマ">
       <Flex
@@ -22,19 +30,15 @@ export const SignupForm:FC = () => {
               <Input type="text" placeholder="ユーザー名" />
             </FormControl>
             <FormControl>
-              <FormLabel>メールアドレス</FormLabel>
-              <Input type="email" placeholder="メールアドレス" />
-            </FormControl>
-            <FormControl>
               <FormLabel>パスワード</FormLabel>
               <Input type="password" placeholder="パスワード" />
             </FormControl>
-            <Link href="/signin"><Text color="blue.400" p={1}>ログインへ</Text></Link>
+            <Link href="/signup"><Text color="blue.400" p={1}>新規登録へ</Text></Link>
             <Button
               bg="blue.400"
               color="whiteAlpha.900"
               type="submit"
-            >新規登録
+            >ログイン
             </Button>
           </Stack>
         </Box>
