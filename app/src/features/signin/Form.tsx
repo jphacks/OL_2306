@@ -1,17 +1,39 @@
 import type { FC } from 'react';
-import { Container, Input, FormControl, FormLabel, FormErrorMessage, FormHelperText } from '@chakra-ui/react'
+import { Flex, Stack, Box, Button, Text, Input, FormControl, FormLabel } from '@chakra-ui/react'
 import { Layout } from '@/application/UI/Components/layout';
+import Link from 'next/link';
 
 export const Form:FC = () => {
   return <>
     <Layout title="フォトマ">
-      <Container>
-        <FormControl>
-          <FormLabel>Email address</FormLabel>
-          <Input type='email' />
-          <FormHelperText>We'll never share your email.</FormHelperText>
-        </FormControl>
-      </Container>
+    <Flex
+      minH={'100vh'}
+      align={'center'}
+      justify={'center'}
+    >
+      <Box rounded={'lg'}
+        boxShadow={'outline'}
+        p={20}
+        w={600}
+      >
+        <Stack spacing={8}>
+          <FormControl>
+            <FormLabel>ユーザー名</FormLabel>
+            <Input type={'text'} placeholder={'ユーザー名'} />
+          </FormControl>
+          <FormControl>
+            <FormLabel>パスワード</FormLabel>
+            <Input type={'password'} placeholder={'パスワード'} />
+          </FormControl>
+          <Link href={'./signup'}><Text color={'blue.400'} p={1}>新規登録へ</Text></Link>
+          <Button
+            bg={'blue.400'}
+            color={'whiteAlpha.900'}
+          >ログイン
+          </Button>
+        </Stack>
+      </Box>
+    </Flex>
     </Layout>
   </>;
 };
