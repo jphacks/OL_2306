@@ -1,4 +1,5 @@
 import type { FC, ReactNode } from 'react';
+import { HeaderCon } from './header/Container/HeaderCon';
 
 interface Props {
   title: string
@@ -8,7 +9,8 @@ interface Props {
 export const Layout: FC<Props> = ({ children, title }) => {
   return (
     <>
-      <main style={{height:'calc(100svh - 143.9px)'}}>{children}</main>
+      <HeaderCon title={title}/>
+      <main>{children}</main>
     </>
   );
 };
