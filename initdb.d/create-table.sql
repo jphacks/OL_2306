@@ -33,6 +33,7 @@ create table tweet (
     id int auto_increment primary key, 
     user_id int not null, -- 投稿したユーザーのid
     content varchar(255) not null, -- 投稿内容
+    type ENUM('tweet', 'model', 'camera') not null, -- 投稿のタイプ
     post_date timestamp default current_timestamp, -- 投稿日時
     update_date timestamp default current_timestamp on update current_timestamp, -- 更新日時
     is_delete boolean default false, -- 論理削除フラグ（削除する場合はこれをtrueにする）
