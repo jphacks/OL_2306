@@ -1,9 +1,15 @@
 import { Layout } from "@/application/UI/Components/layout";
 import { Box, Button, Flex, Heading } from "@chakra-ui/react";
-import { FC, useState } from "react";
+import { FC } from "react";
 
 interface HomePreProps {
-  timeline: Array<any>;
+  timeline: Array<{
+    content: string;
+    id: number;
+    user_id: number;
+    user_name: string;
+    type: "tweet" | "model" | "camera";
+  }>;
   filteredType: "tweet" | "model" | "camera";
   setFilteredType: (type: "tweet" | "model" | "camera") => void;
 }
@@ -42,7 +48,7 @@ export const HomePre: FC<HomePreProps> = ({
               borderWidth="1px"
               borderRadius="lg"
             >
-              <p>{item.user_id}</p>
+              <p>{item.user_name}</p>
               <p>{item.content}</p>
             </Box>
           ))}
