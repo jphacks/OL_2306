@@ -6,6 +6,13 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  if (req.method !== 'POST') {
+    res.status(405).json({
+      message: 'POSTメソッドでアクセスしてください。',
+    });
+    return;
+  }
+
   try {
     // クエリーパラメータから取得
     const email = req.query.email as string;
