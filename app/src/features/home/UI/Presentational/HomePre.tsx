@@ -1,23 +1,86 @@
 import { Layout } from '@/application/UI/Components/layout';
-import { Box, Button, Heading } from '@chakra-ui/react';
+import { Box, Flex, Grid, Text } from '@chakra-ui/react';
 import type { FC } from 'react';
 
-// 関数と変数をPresentationalに渡すために型を記述する
 interface HomePreProps {
-    count : number,
-    handleClick : () => void
+  timeline: Array<{
+    content: string;
+    id: number;
+    user_id: number;
+    user_name: string;
+    type: 'tweet' | 'model' | 'camera';
+  }>;
+  filteredType: 'tweet' | 'model' | 'camera';
+  setFilteredType: (type: 'tweet' | 'model' | 'camera') => void;
 }
 
-/**
- * Presentational（画面のUIを記述する）
- * @returns 
- */
-export const HomePre:FC<HomePreProps> = ({ count, handleClick }) => {
-  return <Layout title='フォトマ'>
-    <Heading>ホーム画面</Heading>
-    <Box>
-      <Box>カウント：{count}</Box>
-      <Button onClick={handleClick}>クリック！！</Button>
-    </Box>
-  </Layout>;
+export const HomePre: FC<HomePreProps> = ({
+  timeline,
+  filteredType,
+  setFilteredType,
+}) => {
+  const filteredTimeline = timeline.filter(
+    (item) => item.type === filteredType
+  );
+
+  return (
+    <Layout title="フォトマ">
+      <Box margin="20px 50px">
+        <Flex justifyContent="flex-end" mt={10} mb={10}>
+          <Text
+            mr={8}
+            ml={2}
+            cursor="pointer"
+            _hover={{ textDecoration: 'underline' }}
+            onClick={() => setFilteredType('tweet')}
+          >
+            つぶやき
+          </Text>
+          <Text
+            mr={8}
+            ml={2}
+            cursor="pointer"
+            _hover={{ textDecoration: 'underline' }}
+            onClick={() => setFilteredType('model')}
+          >
+            モデル募集
+          </Text>
+          <Text
+            mr={2}
+            ml={2}
+            cursor="pointer"
+            _hover={{ textDecoration: 'underline' }}
+            onClick={() => setFilteredType('camera')}
+          >
+            撮影者募集
+          </Text>
+        </Flex>
+        <Grid templateColumns="repeat(4, 1fr)" gap={4}>
+          {filteredTimeline.map((item) => (
+            <Box
+              key={item.id}
+              w="100%"
+              p={4}
+              boxShadow="sm"
+              borderWidth="1px"
+              borderRadius="5px"
+            >
+              <Box
+                bg="gray.300"
+                w="100%"
+                h="150px"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
+                画像
+              </Box>
+              <p>{item.user_name}</p>
+              <p>{item.content}</p>
+            </Box>
+          ))}
+        </Grid>
+      </Box>
+    </Layout>
+  );
 };
