@@ -2,7 +2,7 @@
 create table users (
     id int auto_increment primary key, -- id（主キー）
     user_name varchar(255) not null, -- ユーザー名（一意キーにしても良い）
-    email varchar(255) not null, -- メールアドレス（同じく一意キーにしても良い）
+    email varchar(255) not null unique, -- メールアドレス（同じく一意キーにしても良い）
     password varchar(255) not null, -- パスワード（ハッシュ化してもそのままでも良し）
     description varchar(255) default '', -- 説明
     icon_path varchar(255) default '' -- アイコン画像のパス
@@ -12,7 +12,7 @@ create table users (
 insert into users (user_name, email, password, icon_path) values 
 ('hoge', 'hoge@email.com', SHA2('password', 256), ''), -- パスワードをハッシュ化して保存
 ('fuga', 'fuga@email.com', 'password', '/public/image/icon/02.png'), -- アイコンのURL保存する場合
-('fuga', 'fuga@email.com', 'password', '');
+('foo', 'foo@email.com', 'password', '');
 
 -- ユーザーのポートフォリオ画像テーブル
 create table user_portfolios (
@@ -33,6 +33,7 @@ create table tweet (
     id int auto_increment primary key, 
     user_id int not null, -- 投稿したユーザーのid
     content varchar(255) not null, -- 投稿内容
+    type ENUM('tweet', 'model', 'camera') not null, -- 投稿のタイプ
     post_date timestamp default current_timestamp, -- 投稿日時
     update_date timestamp default current_timestamp on update current_timestamp, -- 更新日時
     is_delete boolean default false, -- 論理削除フラグ（削除する場合はこれをtrueにする）

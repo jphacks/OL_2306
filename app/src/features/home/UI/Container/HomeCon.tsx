@@ -1,12 +1,12 @@
 import type { FC} from 'react';
 import { useState } from 'react';
-import { SigninPre } from '../Presentational/SigninPre';
+import { HomePre } from '../Presentational/HomePre';
 
 /**
- * Container（サインイン画面のロジックを記述する）
+ * Container（ホーム画面のロジックを記述する）
  * @returns 
  */
-export const SigninCon:FC = () => {
+export const HomeCon:FC = () => {
   // 例：カウントアップのロジック
   // 変数
   const [count, setCount] = useState<number>(0);
@@ -16,5 +16,5 @@ export const SigninCon:FC = () => {
   };
 
   // 関数と変数をPresentationalに渡す
-  return <SigninPre count={count} handleClick={handleClick}/>;
+  return <HomePre count={count} handleClick={handleClick}/>;
 };
