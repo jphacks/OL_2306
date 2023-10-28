@@ -25,7 +25,7 @@ export const ProfileCon: FC<ProfileConProps> = ({ userId: uid }) => {
       setUserInfo(data);
     }
     catch (err) {
-      console.log("profile 取得失敗", err);
+      console.log('profile 取得失敗', err);
     }
   };
 
