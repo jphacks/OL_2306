@@ -1,17 +1,17 @@
-import type { FC} from 'react';
+import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import { ProfilePre } from '../Presentational/ProfilePre';
 import type { UserType } from '@/application/types/UserType';
 
 interface ProfileConProps {
-    userId: string | string[] | undefined
+  userId: string | string[] | undefined
 }
-export const ProfileCon:FC<ProfileConProps> = ({userId: uid}) => {
+export const ProfileCon: FC<ProfileConProps> = ({ userId: uid }) => {
   const [userId, setUserId] = useState<string>('');
   const [userInfo, setUserInfo] = useState<UserType>({} as UserType);
   console.log(userId);
 
-  useEffect(()=>{
+  useEffect(() => {
     if (!!uid && typeof uid === 'string') {
       setUserId(uid);
     }
@@ -32,7 +32,7 @@ export const ProfileCon:FC<ProfileConProps> = ({userId: uid}) => {
   useEffect(() => {
     getUserInfo(userId);
   }, []);
-    
-  // follow数、follower数は とりあえず仮で1000, 100
-  return <ProfilePre userInfo={userInfo} userFollowed={1000} userFollower={100} />;
+
+  // follow数、follower数は とりあえず仮で1100, 100
+  return <ProfilePre userInfo={userInfo} userFollowed={1100} userFollower={100} />;
 };
