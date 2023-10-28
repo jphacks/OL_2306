@@ -3,13 +3,14 @@ import { Avatar, Box, Button, Center, Grid, GridItem, HStack, IconButton, Image,
 import type { FC } from 'react';
 import { IconContext } from 'react-icons';
 import { AiTwotoneSetting } from 'react-icons/ai';
+import type { GetProfileAPIResponse } from '../types/GetProfileAPIResponse';
 
 interface ProfilePreProps {
-    userName: string
+  userInfo: GetProfileAPIResponse
     userFollower: number
     userFollowed: number
 }
-export const ProfilePre: FC<ProfilePreProps> = ({userFollowed,userFollower,userName}) => {
+export const ProfilePre: FC<ProfilePreProps> = ({ userFollowed, userFollower, userInfo }) => {
   return <Layout title="フォトマ">
     <Box p={4}>
       <HStack justify='center' align='center'>
@@ -19,7 +20,7 @@ export const ProfilePre: FC<ProfilePreProps> = ({userFollowed,userFollower,userN
         <VStack>
           <HStack pl={9}>
             <Box w='100px'>
-              <Text>{userName}</Text>
+              <Text>{userInfo.user_name}</Text>
             </Box>
             <HStack>
               <Button>フォローする</Button>
@@ -51,11 +52,7 @@ export const ProfilePre: FC<ProfilePreProps> = ({userFollowed,userFollower,userN
       </HStack>
       <Center py={4}>
         <Text>
-                【撮影可能な地域】東京、千葉、神奈川<br/>
-                【撮影料金】1000~5000円<br/>
-                ※交通費は自費での負担とさせていただいております。<br/><br/>
-                東京を中心に活動している「撮影者A」と申します。<br/>
-                ストリートフォトを得意としているアマチュアフォトグラファーです。
+          {userInfo.description}
         </Text>
       </Center>
       <Center flexDir='column' maxW='70vw' margin='auto'>
