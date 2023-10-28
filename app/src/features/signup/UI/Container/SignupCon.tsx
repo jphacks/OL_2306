@@ -1,6 +1,7 @@
-import { useState } from 'react';
-import type { ChangeEvent, FC, FormEvent } from 'react';
+import type { FC, ChangeEvent, FormEvent } from 'react';
 import { SignupPre } from '../Presentational/SignupPre';
+import { useState } from 'react';
+import { useRouter } from "next/router";
 
 export interface FormValues {
   username: string,
@@ -15,6 +16,7 @@ export interface FormValues {
 export const SignupCon:FC = () => {
   const initialValues = { username: "", email: "", password: "" }
   const [formValues, setFormValues] = useState<FormValues>(initialValues)
+  const router = useRouter();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -35,11 +37,8 @@ export const SignupCon:FC = () => {
             "password": formValues.password,
           }
         )
-      }).then((res) => {
-        console.log(res);
-        res.json().then((json) => {
-          console.log(json);
-        })
+      }).then(() => {
+        router.push('/');  
       }).catch((error) => {
         console.log(error);
       })

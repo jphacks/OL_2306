@@ -1,6 +1,7 @@
 import type { FC, ChangeEvent, FormEvent } from 'react';
 import { SigninPre } from '../Presentational/SigninPre';
 import { useState } from 'react';
+import { useRouter } from "next/router";
 
 export interface FormValues {
   email: string,
@@ -14,6 +15,7 @@ export interface FormValues {
 export const SigninCon:FC = () => {
   const initialValues = { email: "", password: "" }
   const [formValues, setFormValues] = useState<FormValues>(initialValues)
+  const router = useRouter();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -22,7 +24,6 @@ export const SigninCon:FC = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formValues);
     fetch('/api/signin', {
       method: 'POST',
       headers: {
@@ -34,11 +35,8 @@ export const SigninCon:FC = () => {
           "password": formValues.password,
         }
       )
-    }).then((res) => {
-      console.log(res);
-      res.json().then((json) => {
-        console.log(json);
-      })
+    }).then(() => {
+      router.push('/');  
     }).catch((error) => {
       console.log(error);
     })
