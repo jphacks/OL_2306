@@ -1,6 +1,13 @@
-import mysql_connection from "@/application/lib/db/connect_db";
-import type { RowDataPacket } from "mysql2";
-import type { NextApiRequest, NextApiResponse } from "next";
+import mysql_connection from '@/application/lib/db/connect_db';
+import type { RowDataPacket } from 'mysql2';
+import type { Connection } from 'mysql2/promise';
+import type { NextApiRequest, NextApiResponse } from 'next';
+
+interface UpdateProfileRequestBody {
+  description?: string;
+  email?: string;
+  user_name?: string;
+}
 
 export default async function handler(
   req: NextApiRequest,
@@ -9,24 +16,24 @@ export default async function handler(
   const userId = req.query.userId as string;
 
   if (!userId) {
-    res.status(400).json({ message: "User ID is missing" });
+    res.status(400).json({ message: 'User ID is missing' });
     return;
   }
 
   const connection = await mysql_connection();
 
   switch (req.method) {
-    case "GET":
+    case 'GET':
       try {
         const userProfile = <RowDataPacket[]>(
           await connection.query(
-            "SELECT user_name, email, description FROM users WHERE id = ?",
+            'SELECT user_name, email, description FROM users WHERE id = ?',
             [userId]
           )
         );
 
         if (!userProfile.length) {
-          return res.status(404).json({ message: "User not found" });
+          return res.status(404).json({ message: 'User not found' });
         }
 
         res.status(200).json(userProfile[0]);
@@ -35,11 +42,11 @@ export default async function handler(
       }
       break;
 
-    case "POST":
-    case "PUT":
+    case 'POST':
+    case 'PUT':
       try {
         await updateProfile(connection, userId, req.body);
-        res.status(200).json({ message: "Successfully updated." });
+        res.status(200).json({ message: 'Successfully updated.' });
       } catch (error: unknown) {
         handleDatabaseError(res, error);
       }
@@ -47,28 +54,32 @@ export default async function handler(
   }
 }
 
-async function updateProfile(connection: any, userId: string, body: any) {
+async function updateProfile(
+  connection: Connection,
+  userId: string,
+  body: UpdateProfileRequestBody
+) {
   const updates = [];
   const values = [];
 
   if (body.description !== undefined) {
-    updates.push("description = ?");
+    updates.push('description = ?');
     values.push(body.description);
   }
 
   if (body.email !== undefined) {
-    updates.push("email = ?");
+    updates.push('email = ?');
     values.push(body.email);
   }
 
   if (body.user_name !== undefined) {
-    updates.push("user_name = ?");
+    updates.push('user_name = ?');
     values.push(body.user_name);
   }
 
   values.push(userId);
 
-  const sql = `UPDATE users SET ${updates.join(", ")} WHERE id = ?`;
+  const sql = `UPDATE users SET ${updates.join(', ')} WHERE id = ?`;
 
   await connection.query(sql, values);
 }
@@ -76,10 +87,10 @@ async function updateProfile(connection: any, userId: string, body: any) {
 function handleDatabaseError(res: NextApiResponse, error: unknown) {
   if (error instanceof Error) {
     res.status(500).json({
-      message: "Failed to process database request.",
+      message: 'Failed to process database request.',
       error: error.message,
     });
   } else {
-    res.status(500).json({ message: "Failed to process database request." });
+    res.status(500).json({ message: 'Failed to process database request.' });
   }
 }
