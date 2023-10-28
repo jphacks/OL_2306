@@ -27,12 +27,12 @@ export const ProfileCon: FC<ProfileConProps> = ({ userId: uid }) => {
       console.log('profile 取得成功', profile);
     }
     catch (err) {
-      if (!userId) return;
       console.log('profile 取得失敗', err);
     }
   };
 
   useEffect(() => {
+    if (!userId) return;
     getUserInfo(userId);
   }, [userId]);
 
