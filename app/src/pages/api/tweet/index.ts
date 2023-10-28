@@ -39,10 +39,10 @@ export default async function handler(
 
       res
         .status(200)
-        .json({ message: "データが正常に格納されました。", result });
+        .json({ message: "Data has been successfully stored.", result });
     } catch (error) {
       res.status(500).json({
-        message: "データの追加に失敗しました。",
+        message: "Adding data failed.",
         error: error,
       });
     }
@@ -52,10 +52,13 @@ export default async function handler(
 
       res
         .status(200)
-        .json({ message: "データの取得に成功しました。", tweets: result[0] });
+        .json({
+          message: "Data acquisition was successful.",
+          tweets: result[0],
+        });
     } catch (error) {
       res.status(500).json({
-        massage: "データの取得に失敗しました。",
+        massage: "Failed to retrieve data.",
         error: error,
       });
     }
