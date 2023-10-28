@@ -23,7 +23,6 @@ export const SignupCon:FC = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      console.log(formValues);
       fetch('/api/signup', {
         method: 'POST',
         headers: {

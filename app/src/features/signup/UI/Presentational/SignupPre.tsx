@@ -1,4 +1,4 @@
-import type { ChangeEvent, FC } from 'react';
+import type { FC } from 'react';
 import { Flex, Stack, Box, Button, Text, Input, FormControl, FormLabel } from '@chakra-ui/react';
 import { Layout } from '@/application/UI/Components/layout';
 import Link from 'next/link';
