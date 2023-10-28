@@ -1,14 +1,14 @@
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import { ProfilePre } from '../Presentational/ProfilePre';
-import type { UserType } from '@/application/types/UserType';
+import type { GetProfileAPIResponse } from '../types/GetProfileAPIResponse';
 
 interface ProfileConProps {
   userId: string | string[] | undefined
 }
 export const ProfileCon: FC<ProfileConProps> = ({ userId: uid }) => {
   const [userId, setUserId] = useState<string>('');
-  const [userInfo, setUserInfo] = useState<UserType>({} as UserType);
+  const [userInfo, setUserInfo] = useState<GetProfileAPIResponse>({} as GetProfileAPIResponse);
   console.log(userId);
 
   useEffect(() => {
@@ -20,9 +20,11 @@ export const ProfileCon: FC<ProfileConProps> = ({ userId: uid }) => {
   // APIからユーザー情報を取得
   const getUserInfo = async (userId: string) => {
     try {
-      const res = await fetch(`http://localhost:8080/api/users/${userId}`);
-      const data = await res.json();
-      setUserInfo(data);
+      const res = await fetch(`/api/users/${userId}?userId=${userId}`);
+      const json = await res.json();
+      const profile = json[0] as GetProfileAPIResponse;
+      setUserInfo(profile);
+      console.log('profile 取得成功', profile);
     }
     catch (err) {
       console.log('profile 取得失敗', err);

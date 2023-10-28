@@ -3,10 +3,10 @@ import { Avatar, Box, Button, Center, Grid, GridItem, HStack, IconButton, Image,
 import type { FC } from 'react';
 import { IconContext } from 'react-icons';
 import { AiTwotoneSetting } from 'react-icons/ai';
-import type { UserType } from '@/application/types/UserType';
+import type { GetProfileAPIResponse } from '../types/GetProfileAPIResponse';
 
 interface ProfilePreProps {
-  userInfo: UserType
+  userInfo: GetProfileAPIResponse
     userFollower: number
     userFollowed: number
 }
@@ -20,7 +20,7 @@ export const ProfilePre: FC<ProfilePreProps> = ({ userFollowed, userFollower, us
         <VStack>
           <HStack pl={9}>
             <Box w='100px'>
-              <Text>{userInfo.userName}</Text>
+              <Text>{userInfo.user_name}</Text>
             </Box>
             <HStack>
               <Button>フォローする</Button>
