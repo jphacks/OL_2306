@@ -1,3 +1,4 @@
+import { HomeCon } from '@/features/home/UI/Container/HomeCon';
 import { Heading } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
@@ -11,9 +12,7 @@ const Home:NextPage = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <Heading>Hello</Heading>
-      </main>
+      <HomeCon/>
     </>
   );
 };
