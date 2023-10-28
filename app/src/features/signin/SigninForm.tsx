@@ -29,6 +29,7 @@ export const SigninForm:FC = () => {
             <Button
               bg="blue.400"
               color="whiteAlpha.900"
+              type="submit"
             >ログイン
             </Button>
           </Stack>

@@ -33,6 +33,7 @@ export const SignupForm:FC = () => {
             <Button
               bg="blue.400"
               color="whiteAlpha.900"
+              type="submit"
             >新規登録
             </Button>
           </Stack>
