@@ -55,7 +55,7 @@ export const HomePre: FC<HomePreProps> = ({
             撮影者募集
           </Text>
         </Flex>
-        <Flex wrap="wrap" justify="space-between">
+        <Flex wrap="wrap" justify="flex-start">
           {filteredTimeline.map((item) => (
             <Box
               key={item.id}
