@@ -3,7 +3,7 @@ import { Flex, Stack, Box, Button, Text, Input, FormControl, FormLabel } from '@
 import { Layout } from '@/application/UI/Components/layout';
 import Link from 'next/link';
 
-export const SigninForm:FC = () => {
+export const SignupForm:FC = () => {
   return <>
     <Layout title="フォトマ">
       <Flex
@@ -22,14 +22,18 @@ export const SigninForm:FC = () => {
               <Input type="text" placeholder="ユーザー名" />
             </FormControl>
             <FormControl>
+              <FormLabel>メールアドレス</FormLabel>
+              <Input type="email" placeholder="メールアドレス" />
+            </FormControl>
+            <FormControl>
               <FormLabel>パスワード</FormLabel>
               <Input type="password" placeholder="パスワード" />
             </FormControl>
-            <Link href="/signup"><Text color="blue.400" p={1}>新規登録へ</Text></Link>
+            <Link href="/signin"><Text color="blue.400" p={1}>ログインへ</Text></Link>
             <Button
               bg="blue.400"
               color="whiteAlpha.900"
-            >ログイン
+            >新規登録
             </Button>
           </Stack>
         </Box>
