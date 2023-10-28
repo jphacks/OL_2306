@@ -1,19 +1,38 @@
 import type { FC} from 'react';
 import { useEffect, useState } from 'react';
 import { ProfilePre } from '../Presentational/ProfilePre';
+import { UserType } from '@/application/types/UserType';
 
 interface ProfileConProps {
     userId: string | string[] | undefined
 }
 export const ProfileCon:FC<ProfileConProps> = ({userId: uid}) => {
   const [userId, setUserId] = useState<string>('');
+  const [userInfo, setUserInfo] = useState<UserType>({} as UserType);
   console.log(userId);
 
   useEffect(()=>{
     if (!!uid && typeof uid === 'string') {
       setUserId(uid);
     }
-  },[uid]);
+  }, [uid]);
+
+  // APIからユーザー情報を取得
+  const getUserInfo = async (userId: string) => {
+    try {
+      const res = await fetch(`http://localhost:3000/api/users/${userId}`);
+      const data = await res.json();
+      setUserInfo(data);
+    }
+    catch (err) {
+      console.log("profile 取得失敗", err);
+    }
+  }
+
+  useEffect(() => {
+    getUserInfo(userId);
+  }, []);
     
-  return <ProfilePre userName="撮影者A" userFollowed={1000} userFollower={100}/>;
+  // follow数、follower数は とりあえず仮で1000, 100
+  return <ProfilePre userName={userInfo.user_name} userFollowed={1000} userFollower={100} />;
 };
