@@ -1,5 +1,5 @@
 import { Layout } from "@/application/UI/Components/layout";
-import { Box, Button, Heading } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading } from "@chakra-ui/react";
 import { FC, useState } from "react";
 
 interface HomePreProps {
@@ -19,20 +19,34 @@ export const HomePre: FC<HomePreProps> = ({
 
   return (
     <Layout title="フォトマ">
-      <Heading>ホーム画面</Heading>
-      <Box>
-        <Button onClick={() => setFilteredType("tweet")}>つぶやき</Button>
-        <Button onClick={() => setFilteredType("model")}>モデル募集</Button>
-        <Button onClick={() => setFilteredType("camera")}>撮影者募集</Button>
-      </Box>
-      <Box>
-        {filteredTimeline.map((item) => (
-          <Box key={item.id}>
-            <p>{item.user_id}</p>
-            <p>{item.content}</p>
-            <p>{item.post_date}</p>
-          </Box>
-        ))}
+      <Box margin="20px">
+        <Box mb={4}>
+          <Button onClick={() => setFilteredType("tweet")} ml={2}>
+            つぶやき
+          </Button>
+          <Button onClick={() => setFilteredType("model")} ml={2}>
+            モデル募集
+          </Button>
+          <Button onClick={() => setFilteredType("camera")} ml={2}>
+            撮影者募集
+          </Button>
+        </Box>
+        <Flex wrap="wrap" justify="space-between">
+          {filteredTimeline.map((item) => (
+            <Box
+              key={item.id}
+              w="calc(25% - 1rem)"
+              mb={4}
+              p={4}
+              boxShadow="sm"
+              borderWidth="1px"
+              borderRadius="lg"
+            >
+              <p>{item.user_id}</p>
+              <p>{item.content}</p>
+            </Box>
+          ))}
+        </Flex>
       </Box>
     </Layout>
   );
