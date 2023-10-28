@@ -30,7 +30,11 @@ export const HomePre: FC<HomePreProps> = ({ count, handleClick }) => {
   const [content, setContent] = useState("");
   const [type, setType] = useState<"tweet" | "model" | "camera">("tweet");
 
-  const handleClose = () => setIsOpen(false);
+  const handleClose = () => {
+    setIsOpen(false);
+    setContent("");
+    setType("tweet");
+  };
   const handleOpen = () => setIsOpen(true);
   const handleSubmit = () => {
     setIsOpen(false);
