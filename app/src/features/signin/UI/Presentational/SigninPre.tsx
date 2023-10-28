@@ -26,8 +26,8 @@ export const SigninPre:FC<SigninPreProps> = ({}) => {
         >
           <Stack spacing={8}>
             <FormControl>
-              <FormLabel>ユーザー名</FormLabel>
-              <Input type="text" placeholder="ユーザー名" />
+              <FormLabel>メールアドレス</FormLabel>
+              <Input type="email" placeholder="メールアドレス" />
             </FormControl>
             <FormControl>
               <FormLabel>パスワード</FormLabel>
