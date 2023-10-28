@@ -2,51 +2,49 @@ import { Layout } from "@/application/UI/Components/layout";
 import {
   Button,
   FormControl,
-  FormLabel,
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
-  ModalHeader,
   ModalOverlay,
   Select,
   Textarea,
-  useDisclosure,
 } from "@chakra-ui/react";
 import React, { FC, useState } from "react";
 
 interface HomePreProps {
-  count: number;
-  handleClick: () => void;
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+  onSubmit: (content: string, type: string) => void;
 }
 
 /**
  * Presentational（画面のUIを記述する）
  * @returns
  */
-export const HomePre: FC<HomePreProps> = ({ count, handleClick }) => {
-  const [isOpen, setIsOpen] = useState(false);
+export const HomePre: FC<HomePreProps> = ({
+  isOpen,
+  onOpen,
+  onClose,
+  onSubmit,
+}) => {
   const [content, setContent] = useState("");
   const [type, setType] = useState<"tweet" | "model" | "camera">("tweet");
 
-  const handleClose = () => {
-    setIsOpen(false);
+  const handlePost = () => {
+    onSubmit(content, type);
     setContent("");
     setType("tweet");
-  };
-  const handleOpen = () => setIsOpen(true);
-  const handleSubmit = () => {
-    setIsOpen(false);
   };
 
   return (
     <Layout title="フォトマ">
-      <Button position="fixed" right="1rem" bottom="1rem" onClick={handleOpen}>
+      <Button position="fixed" right="1rem" bottom="1rem" onClick={onOpen}>
         +
       </Button>
 
-      <Modal isOpen={isOpen} onClose={handleClose}>
+      <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton />
@@ -79,6 +77,9 @@ export const HomePre: FC<HomePreProps> = ({ count, handleClick }) => {
               />
             </FormControl>
           </ModalBody>
+          <Button mt={4} onClick={handlePost}>
+            送信
+          </Button>
         </ModalContent>
       </Modal>
     </Layout>

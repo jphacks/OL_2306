@@ -1,20 +1,47 @@
-import type { FC} from 'react';
-import { useState } from 'react';
-import { HomePre } from '../Presentational/HomePre';
+import { FC, useState } from "react";
+import { HomePre } from "../Presentational/HomePre";
 
-/**
- * Container（ホーム画面のロジックを記述する）
- * @returns 
- */
-export const HomeCon:FC = () => {
-  // 例：カウントアップのロジック
-  // 変数
-  const [count, setCount] = useState<number>(0);
-  // 関数
-  const handleClick = () => {
-    setCount(prev => prev + 1);
+export const HomeCon: FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const onClose = () => {
+    setIsOpen(false);
   };
 
-  // 関数と変数をPresentationalに渡す
-  return <HomePre count={count} handleClick={handleClick}/>;
+  const onOpen = () => {
+    setIsOpen(true);
+  };
+
+  const handlePost = async (content: string, type: string) => {
+    try {
+      const response = await fetch("/api/tweet", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId: "2", content, type }), // userIdは仮
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log("Posted successfully:", data);
+      } else {
+        console.error("Error posting tweet:", data.message);
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+
+  return (
+    <HomePre
+      isOpen={isOpen}
+      onOpen={onOpen}
+      onClose={onClose}
+      onSubmit={handlePost}
+    />
+  );
 };
+
+export default HomeCon;
