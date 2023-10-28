@@ -20,7 +20,7 @@ export const ProfileCon: FC<ProfileConProps> = ({ userId: uid }) => {
   // APIからユーザー情報を取得
   const getUserInfo = async (userId: string) => {
     try {
-      const res = await fetch(`http://localhost:3000/api/users/${userId}`);
+      const res = await fetch(`http://localhost:8080/api/users/${userId}`);
       const data = await res.json();
       setUserInfo(data);
     }
