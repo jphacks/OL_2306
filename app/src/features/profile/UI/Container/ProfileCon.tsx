@@ -9,7 +9,6 @@ interface ProfileConProps {
 export const ProfileCon: FC<ProfileConProps> = ({ userId: uid }) => {
   const [userId, setUserId] = useState<string>('');
   const [userInfo, setUserInfo] = useState<GetProfileAPIResponse>({} as GetProfileAPIResponse);
-  console.log(userId);
 
   useEffect(() => {
     if (!!uid && typeof uid === 'string') {
@@ -20,13 +19,15 @@ export const ProfileCon: FC<ProfileConProps> = ({ userId: uid }) => {
   // APIからユーザー情報を取得
   const getUserInfo = async (userId: string) => {
     try {
-      const res = await fetch(`/api/users/${userId}?userId=${userId}`);
+      const url = `/api/user/${userId}?userId=${userId}`;
+      const res = await fetch(url);
       const json = await res.json();
       const profile = json[0] as GetProfileAPIResponse;
       setUserInfo(profile);
       console.log('profile 取得成功', profile);
     }
     catch (err) {
+      if (!userId) return;
       console.log('profile 取得失敗', err);
     }
   };
