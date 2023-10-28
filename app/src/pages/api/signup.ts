@@ -15,11 +15,11 @@ export default async function handler(
 
   try {
     // クエリーパラメータから取得
-    const email = req.query.email as string;
-    const password = req.query.password as string;
-    const user_name = req.query.user_name as string;
-    let description = req.query.description as string;
-    let icon_path = req.query.icon_path as string;
+    const email = req.body.email as string;
+    const password = req.body.password as string;
+    const user_name = req.body.user_name as string;
+    let description = req.body.description as string;
+    let icon_path = req.body.icon_path as string;
 
     // パラメータが空でないかチェック
     const check_parameter = (parameter_name: string, parameter: string) => {

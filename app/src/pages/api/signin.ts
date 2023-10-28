@@ -15,8 +15,8 @@ export default async function handler(
 
   try {
     // クエリーパラメータから取得
-    const email = req.query.email as string;
-    const password = req.query.password as string;
+    const email = req.body.email as string;
+    const password = req.body.password as string;
 
     // パラメータが空でないかチェック
     const check_parameter = (parameter_name: string, parameter: string) => {
