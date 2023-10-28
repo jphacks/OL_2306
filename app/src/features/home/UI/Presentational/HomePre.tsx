@@ -1,6 +1,6 @@
-import { Layout } from "@/application/UI/Components/layout";
-import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
-import { FC } from "react";
+import { Layout } from '@/application/UI/Components/layout';
+import { Box, Flex, Text } from '@chakra-ui/react';
+import type { FC } from 'react';
 
 interface HomePreProps {
   timeline: Array<{
@@ -8,10 +8,10 @@ interface HomePreProps {
     id: number;
     user_id: number;
     user_name: string;
-    type: "tweet" | "model" | "camera";
+    type: 'tweet' | 'model' | 'camera';
   }>;
-  filteredType: "tweet" | "model" | "camera";
-  setFilteredType: (type: "tweet" | "model" | "camera") => void;
+  filteredType: 'tweet' | 'model' | 'camera';
+  setFilteredType: (type: 'tweet' | 'model' | 'camera') => void;
 }
 
 export const HomePre: FC<HomePreProps> = ({
@@ -31,8 +31,8 @@ export const HomePre: FC<HomePreProps> = ({
             mr={8}
             ml={2}
             cursor="pointer"
-            _hover={{ textDecoration: "underline" }}
-            onClick={() => setFilteredType("tweet")}
+            _hover={{ textDecoration: 'underline' }}
+            onClick={() => setFilteredType('tweet')}
           >
             つぶやき
           </Text>
@@ -40,8 +40,8 @@ export const HomePre: FC<HomePreProps> = ({
             mr={8}
             ml={2}
             cursor="pointer"
-            _hover={{ textDecoration: "underline" }}
-            onClick={() => setFilteredType("model")}
+            _hover={{ textDecoration: 'underline' }}
+            onClick={() => setFilteredType('model')}
           >
             モデル募集
           </Text>
@@ -49,8 +49,8 @@ export const HomePre: FC<HomePreProps> = ({
             mr={2}
             ml={2}
             cursor="pointer"
-            _hover={{ textDecoration: "underline" }}
-            onClick={() => setFilteredType("camera")}
+            _hover={{ textDecoration: 'underline' }}
+            onClick={() => setFilteredType('camera')}
           >
             撮影者募集
           </Text>
