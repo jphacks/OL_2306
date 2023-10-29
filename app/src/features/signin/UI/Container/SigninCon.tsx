@@ -31,7 +31,8 @@ export const SigninCon:FC = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
-      await axios.post('/api/signin', postData)
+      await axios.post('/api/signin', postData);
+      router.push('/');  
     } catch(e) {
       console.log(e)
     }
