@@ -5,6 +5,7 @@ type Tweet = {
   userId: string;
   content: string;
   type: 'tweet' | 'model' | 'camera';
+  imagePath?: string;
 };
 
 export default async function handler(
@@ -15,7 +16,7 @@ export default async function handler(
   const connection = await mysql_connection();
 
   if (req.method === 'POST') {
-    const { userId, content, type }: Tweet = req.body;
+    const { userId, content, type, imagePath }: Tweet = req.body;
 
     if (!userId || !content || !type) {
       return res.status(400).json({
@@ -33,8 +34,8 @@ export default async function handler(
 
     try {
       const result = await connection.query(
-        'INSERT INTO tweet (user_id, content, type) VALUES (?, ?, ?)',
-        [userId, content, type]
+        'INSERT INTO tweet (user_id, content, type, image_path) VALUES (?, ?, ?, ?)',
+        [userId, content, type, imagePath]
       );
 
       res
