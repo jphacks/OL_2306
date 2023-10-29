@@ -69,7 +69,7 @@ export const HomePre: FC<HomePreProps> = ({
 }) => {
   return (
     <Layout title="フォトマ">
-      <Box margin="20px 50px">
+      <Box {...styles.home}>
         <Flex justifyContent="flex-end" mt={10} mb={10}>
           <Text {...styles.menu} onClick={() => setFilteredType("tweet")}>
             つぶやき
@@ -81,7 +81,7 @@ export const HomePre: FC<HomePreProps> = ({
             撮影者募集
           </Text>
         </Flex>
-        <Grid templateColumns="repeat(4, 1fr)" gap={4}>
+        <Grid {...styles.gridContainer}>
           {filteredTimeline.map((item) => (
             <Box key={item.id} {...styles.card}>
               <Box {...styles.cardImage}>
@@ -148,6 +148,13 @@ export const HomePre: FC<HomePreProps> = ({
 };
 
 const styles = {
+  home: {
+    margin: ["10px 25px", "15px 35px", "20px 50px"], // sm で "10px 25px"、md で "15px 35px"、lg で "20px 50px"
+  },
+  gridContainer: {
+    templateColumns: ["repeat(2, 1fr)", "repeat(3, 1fr)", "repeat(4, 1fr)"], // sm で 2 列、md で 3 列、lg 以降で 4 列
+    gap: 4,
+  },
   menu: {
     mr: 8,
     ml: 2,
@@ -164,7 +171,7 @@ const styles = {
   cardImage: {
     bg: "gray.300",
     w: "100%",
-    h: "150px",
+    h: ["60px", "120px", "150px"], // sm で 100px、md で 120px、lg で 150px
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
