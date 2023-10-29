@@ -2,7 +2,6 @@ import type { FC, ChangeEvent, FormEvent } from 'react';
 import { SignupPre } from '../Presentational/SignupPre';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import axios from 'axios';
 
 export interface FormValues {
   username: string,
@@ -62,10 +61,23 @@ export const SignupCon:FC = () => {
       return ;
     }
     try {
-      const res = await axios.post('/api/signup', postData);
-      const userId = res.data.contents.insertId;
-      console.log(userId);
-      router.push('/');
+      const url = '/api/signup';
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(
+          {
+            "user_name": formValues.username,
+            "email": formValues.email,
+            "password": formValues.password,
+          }
+        )
+      };
+      const res = await fetch(url, options);
+      console.log(res);
+      router.push('/'); 
     } catch(e) {
       console.log(e);
     }

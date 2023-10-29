@@ -29,11 +29,6 @@ export const SigninCon:FC = () => {
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const postData = {
-    'email': formValues.email,
-    'password': formValues.password
-  };
-
   const validate = (values: FormValues) => {
     const errors: FormErrors = { email: '', password: '' };
     const regex = /^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/;
@@ -56,13 +51,26 @@ export const SigninCon:FC = () => {
       return ;
     }
     try {
-      const res = await axios.post('/api/signin', postData);
+      const url = '/api/signin';
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(
+          {
+            "email": formValues.email,
+            "password": formValues.password,
+          }
+        )
+      };
+      const res = await fetch(url, options);
       console.log(res);
-      router.push('/');
+      router.push('/'); 
     } catch(e) {
       console.log(e);
     }
-  };
+  }
 
   return <SigninPre handleChange={handleChange} handleSubmit={handleSubmit} formValues={formValues} formErrors={formErrors} />;
 };
