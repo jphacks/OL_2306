@@ -168,10 +168,23 @@ export const HomePre: FC<HomePreProps> = ({
                 <img
                   src={selectedItem.image_path}
                   alt="投稿画像"
-                  style={{ width: "100%", objectFit: "contain" }}
+                  style={{
+                    marginTop: "40px",
+                    width: "100%",
+                    objectFit: "contain",
+                  }}
                 />
-                <p>{selectedItem.user_name}</p>
-                <p>{selectedItem.content}</p>
+                <p
+                  style={{
+                    marginTop: "8px",
+                    marginBottom: "8px",
+                  }}
+                >
+                  {selectedItem.user_name}
+                </p>
+                <p style={{ marginTop: "8px", marginBottom: "10px" }}>
+                  {selectedItem.content}
+                </p>
               </>
             )}
           </ModalBody>
@@ -265,5 +278,9 @@ const styles = {
     ml: 4,
     mr: "10px",
     mb: "10px",
+  },
+  detailModaltext: {
+    mt: "20px",
+    mb: "20px",
   },
 };
