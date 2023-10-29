@@ -1,4 +1,5 @@
 import { Layout } from '@/application/UI/Components/layout';
+<<<<<<< Updated upstream
 import {
   Box,
   Button,
@@ -18,6 +19,9 @@ import {
   Text,
   Textarea,
 } from '@chakra-ui/react';
+=======
+import { Box, Flex, Grid, Text, Image, Link } from '@chakra-ui/react';
+>>>>>>> Stashed changes
 import type { FC } from 'react';
 import React from 'react';
 
@@ -89,19 +93,37 @@ export const HomePre: FC<HomePreProps> = ({
             撮影者募集
           </Text>
         </Flex>
+<<<<<<< Updated upstream
         <Grid {...styles.gridContainer}>
           {filteredTimeline.map((item) => (
+=======
+        <Grid templateColumns="repeat(4, 1fr)" gap={4}>
+          {filteredTimeline.map((item, index) => (
+>>>>>>> Stashed changes
             <Box
               key={item.id}
               {...styles.card}
               onClick={() => openDetailModal(item)}
             >
+<<<<<<< Updated upstream
               <Box {...styles.cardImage}>
                 {item.image_path && (
                   <img src={item.image_path} alt="投稿画像" {...styles.image} />
                 )}
+=======
+              <Box
+                w="100%"
+                h="150px"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Image src={`images/${index + 1}.png`} alt="tweet" maxH={150} />
+>>>>>>> Stashed changes
               </Box>
-              <p>{item.user_name}</p>
+              <Link href={`/profile/${item.id}`}>
+                <a>{item.user_name}</a>
+              </Link>
               <p>{item.content}</p>
             </Box>
           ))}
