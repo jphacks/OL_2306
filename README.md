@@ -8,6 +8,10 @@
 
 撮影内容の募集や自分の過去の撮影画像などを投稿することで、趣味仕事関係なく撮りたい人と撮られたい人をマッチングすることができます。
 
+プレゼンスライド
+
+https://www.canva.com/design/DAFynWwL4_E/mMXpYA8Fb0gOv3E4MThgmA/view?utm_content=DAFynWwL4_E&utm_campaign=designshare&utm_medium=link&utm_source=editor
+
 ### 背景(製品開発のきっかけ、課題等）
 
 自己紹介のスライドやSNSのアイコン画像などで自分の写真が必要な時に、使える写真がないことが多いことが話題になり、「撮ってもらいたい人」と「撮りたい人」を簡単にマッチングさせることのできるサービスがあったら良いなという意見が出たからです。
