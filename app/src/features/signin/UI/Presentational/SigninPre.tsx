@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { Flex, Stack, Box, Button, Text, Input, FormControl, FormLabel } from '@chakra-ui/react';
 import { Layout } from '@/application/UI/Components/layout';
 import Link from 'next/link';
-import { FormErrors, FormValues } from '../Container/SigninCon';
+import type { FormErrors, FormValues } from '../Container/SigninCon';
 
 // 関数と変数をPresentationalに渡すために型を記述する
 interface SigninPreProps {
@@ -38,8 +38,8 @@ export const SigninPre:FC<SigninPreProps> = ({ handleChange, handleSubmit, formV
                   type="email"
                   name='email'
                   placeholder="メールアドレス"
-                  onChange={(e) => handleChange(e)}
                   value={formValues.email}
+                  onChange={(e) => handleChange(e)}
                 />
                 <Box>
                   <Text color="red" as="b">{formErrors.email}</Text>
@@ -51,9 +51,9 @@ export const SigninPre:FC<SigninPreProps> = ({ handleChange, handleSubmit, formV
                   type="password"
                   name='password'
                   placeholder="パスワード"
-                  onChange={(e) => handleChange(e)}
                   value={formValues.password}
-                 />
+                  onChange={(e) => handleChange(e)}
+                />
                 <Box>
                   <Text color="red" as="b">{formErrors.password}</Text>
                 </Box>

@@ -1,7 +1,7 @@
 import type { FC, ChangeEvent, FormEvent } from 'react';
 import { SignupPre } from '../Presentational/SignupPre';
 import { useState } from 'react';
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 import axios from 'axios';
 
 export interface FormValues {
@@ -21,55 +21,55 @@ export interface FormErrors {
  */
 
 export const SignupCon:FC = () => {
-  const initialValues = { username: "", email: "", password: "" }
-  const [formValues, setFormValues] = useState<FormValues>(initialValues)
+  const initialValues = { username: '', email: '', password: '' };
+  const [formValues, setFormValues] = useState<FormValues>(initialValues);
   const router = useRouter();
-  const [formErrors, setFormErrors] = useState<FormErrors>({ username: "", email: "", password: "" });
+  const [formErrors, setFormErrors] = useState<FormErrors>({ username: '', email: '', password: '' });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value })
-  }
+    setFormValues({ ...formValues, [name]: value });
+  };
 
   const postData = {
-    "user_name": formValues.username,
-    "email": formValues.email,
-    "password": formValues.password
-  }
+    'user_name': formValues.username,
+    'email': formValues.email,
+    'password': formValues.password
+  };
 
   const validate = (values: FormValues) => {
-    let errors: FormErrors = { username: "", email: "", password: "" };
-    const regex = /^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/
+    const errors: FormErrors = { username: '', email: '', password: '' };
+    const regex = /^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/;
     if(!values.username) {
-      errors.username = "ユーザー名を入力してください"
+      errors.username = 'ユーザー名を入力してください';
     }
     if(!values.email) {
-      errors.email = "メールアドレスを入力してください"
+      errors.email = 'メールアドレスを入力してください';
     } else if (!regex.test(values.email)) {
-      errors.email = "正しいメールアドレスを入力してください"
+      errors.email = '正しいメールアドレスを入力してください';
     }
     if(!values.password) {
-      errors.password = "パスワードを入力してください"
+      errors.password = 'パスワードを入力してください';
     }
     return errors;
-  }
+  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const errorCheck = validate(formValues);
     setFormErrors(errorCheck);
-    if (errorCheck.username !== "" || errorCheck.email !== "" || errorCheck.password !== "" ) {
+    if (errorCheck.username !== '' || errorCheck.email !== '' || errorCheck.password !== '' ) {
       return ;
     }
     try {
-      const res = await axios.post('/api/signup', postData)
-      const userId = res.data.contents.insertId
+      const res = await axios.post('/api/signup', postData);
+      const userId = res.data.contents.insertId;
       console.log(userId);
       router.push('/');
     } catch(e) {
-      console.log(e)
+      console.log(e);
     }
-  }
+  };
 
   return <SignupPre handleChange={handleChange} handleSubmit={handleSubmit} formValues={formValues} formErrors={formErrors} />;
 };

@@ -1,7 +1,7 @@
 import type { FC, ChangeEvent, FormEvent } from 'react';
 import { SigninPre } from '../Presentational/SigninPre';
 import { useState } from 'react';
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 import axios from 'axios';
 
 export interface FormValues {
@@ -19,50 +19,50 @@ export interface FormErrors {
  * @returns 
  */
 export const SigninCon:FC = () => {
-  const initialValues = { email: "", password: "" }
-  const [formValues, setFormValues] = useState<FormValues>(initialValues)
+  const initialValues = { email: '', password: '' };
+  const [formValues, setFormValues] = useState<FormValues>(initialValues);
   const router = useRouter();
-  const [formErrors, setFormErrors] = useState<FormErrors>({ email: "", password: "" });
+  const [formErrors, setFormErrors] = useState<FormErrors>({ email: '', password: '' });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value })
-  }
+    setFormValues({ ...formValues, [name]: value });
+  };
 
   const postData = {
-    "email": formValues.email,
-    "password": formValues.password
-  }
+    'email': formValues.email,
+    'password': formValues.password
+  };
 
   const validate = (values: FormValues) => {
-    let errors: FormErrors = { email: "", password: "" };
-    const regex = /^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/
+    const errors: FormErrors = { email: '', password: '' };
+    const regex = /^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/;
     if(!values.email) {
-      errors.email = "メールアドレスを入力してください"
+      errors.email = 'メールアドレスを入力してください';
     } else if (!regex.test(values.email)) {
-      errors.email = "正しいメールアドレスを入力してください"
+      errors.email = '正しいメールアドレスを入力してください';
     }
     if(!values.password) {
-      errors.password = "パスワードを入力してください"
+      errors.password = 'パスワードを入力してください';
     }
     return errors;
-  }
+  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const errorCheck = validate(formValues);
     setFormErrors(errorCheck);
-    if (errorCheck.email !== "" || errorCheck.password !== "" ) {
+    if (errorCheck.email !== '' || errorCheck.password !== '' ) {
       return ;
     }
     try {
-      const res = await axios.post('/api/signin', postData)
+      const res = await axios.post('/api/signin', postData);
       console.log(res);
       router.push('/');
     } catch(e) {
-      console.log(e)
+      console.log(e);
     }
-  }
+  };
 
   return <SigninPre handleChange={handleChange} handleSubmit={handleSubmit} formValues={formValues} formErrors={formErrors} />;
 };
