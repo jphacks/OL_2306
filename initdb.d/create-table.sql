@@ -37,6 +37,7 @@ create table tweet (
     post_date timestamp default current_timestamp, -- 投稿日時
     update_date timestamp default current_timestamp on update current_timestamp, -- 更新日時
     is_delete boolean default false, -- 論理削除フラグ（削除する場合はこれをtrueにする）
+    image_path varchar(255) DEFAULT NULL, -- 画像のURL
     FOREIGN KEY (user_id) REFERENCES users(id) -- 外部キー：user_idはusersテーブルのidを参照する
 );
 

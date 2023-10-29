@@ -1,11 +1,9 @@
 import mysql_connection from '@/application/lib/db/connect_db';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-type Tweet = {
-  userId: string;
-  content: string;
-  type: 'tweet' | 'model' | 'camera';
-  imagePath?: string;
+type TweetImage = {
+  tweetId: number;
+  imagePath: string;
 };
 
 export default async function handler(
@@ -16,26 +14,19 @@ export default async function handler(
   const connection = await mysql_connection();
 
   if (req.method === 'POST') {
-    const { userId, content, type, imagePath }: Tweet = req.body;
+    const { tweetId, imagePath }: TweetImage = req.body;
 
-    if (!userId || !content || !type) {
+    if (!tweetId || !imagePath) {
       return res.status(400).json({
         success: false,
         message: 'Required parameters are missing',
       });
     }
 
-    if (!['tweet', 'model', 'camera'].includes(type)) {
-      return res.status(400).json({
-        success: false,
-        message: 'Invalid type parameter',
-      });
-    }
-
     try {
       const result = await connection.query(
-        'INSERT INTO tweet (user_id, content, type, image_path) VALUES (?, ?, ?, ?)',
-        [userId, content, type, imagePath]
+        'INSERT INTO tweet_images (tweet_id, image_path) VALUES (?, ?)',
+        [tweetId, imagePath]
       );
 
       res
