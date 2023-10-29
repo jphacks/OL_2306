@@ -120,7 +120,20 @@ export const HomePre: FC<HomePreProps> = ({
         </Grid>
       </Box>
 
-      <Button position="fixed" right="1rem" bottom="1rem" onClick={onOpen}>
+      <Button
+        position="fixed"
+        width="50px"
+        height="50px"
+        right="50px"
+        bottom="50px"
+        borderRadius="50%"
+        onClick={onOpen}
+        backgroundColor="transparent"
+        border="1px solid gray"
+        _hover={{
+          backgroundColor: "gray.100",
+        }}
+      >
         +
       </Button>
 
