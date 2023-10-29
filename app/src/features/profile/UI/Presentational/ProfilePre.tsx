@@ -12,8 +12,8 @@ interface ProfilePreProps {
   setUserInfo: (userInfo: GetProfileAPIResponse) => void
 }
 export const ProfilePre: FC<ProfilePreProps> = ({ userId, userInfo, userFollower, userFollowed, setUserInfo }) => {
-  var rand: number[] = [];
-  for (var i = 0; i < 30; i++) {
+  let rand: number[] = [];
+  for (let i = 0; i < 30; i++) {
     rand[i] = Math.floor(Math.random() * 20);
     Math.random();
   }
@@ -59,7 +59,7 @@ export const ProfilePre: FC<ProfilePreProps> = ({ userId, userInfo, userFollower
         <Grid gridTemplateColumns='repeat(5, 1fr)' gap={3}>
           {rand.map((rd, index) => (
             <GridItem key={index}>
-              <Image src={`/images/${rd}.png`} maxH='200px' maxW='200px' />
+              <Image src={`/images/${rd}.png`} maxH='200px' maxW='200px' alt='image' />
             </GridItem>
           ))}
         </Grid>
