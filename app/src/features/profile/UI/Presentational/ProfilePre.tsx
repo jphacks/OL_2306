@@ -1,5 +1,5 @@
 import { Layout } from '@/application/UI/Components/layout';
-import { Avatar, Box, Button, Center, Grid, GridItem, HStack, IconButton, Image, Text, VStack } from '@chakra-ui/react';
+import { Avatar, Box, Button, Center, Grid, GridItem, HStack, Image, Text, VStack } from '@chakra-ui/react';
 import type { FC } from 'react';
 import type { GetProfileAPIResponse } from '../../types/GetProfileAPIResponse';
 import { SettingModal } from '../../Components/EditModal';
