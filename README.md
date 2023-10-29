@@ -48,6 +48,7 @@ UI・UXも工夫をして独自性を出していきたいです。
   * Next.js（バックエンド）
   * MySQL（データベース）
   * Docker（開発環境）
+* GitHub ActionsでCIを組んでコードの質を一定に保つようにしています。
 
 
 ## 開発技術
@@ -59,9 +60,11 @@ UI・UXも工夫をして独自性を出していきたいです。
 #### フレームワーク・ライブラリ・モジュール
 * Next.js
 * TypeScript
+* ES Lint
 * Chakra UI
 * MySQL
 * Docker
+* GitHub Actions
 
 ```mermaid
 flowchart
