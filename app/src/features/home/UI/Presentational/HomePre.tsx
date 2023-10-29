@@ -165,15 +165,13 @@ export const HomePre: FC<HomePreProps> = ({
           <ModalBody>
             {selectedItem && (
               <>
-                <img
-                  src={selectedItem.image_path}
-                  alt="投稿画像"
-                  style={{
-                    marginTop: "40px",
-                    width: "100%",
-                    objectFit: "contain",
-                  }}
-                />
+                <Box {...styles.detailModalImage}>
+                  <img
+                    src={selectedItem.image_path}
+                    alt="投稿画像"
+                    {...styles.image}
+                  />
+                </Box>
                 <p
                   style={{
                     marginTop: "8px",
@@ -279,8 +277,13 @@ const styles = {
     mr: "10px",
     mb: "10px",
   },
-  detailModaltext: {
-    mt: "20px",
-    mb: "20px",
+  detailModalImage: {
+    bg: "gray.300",
+    marginTop: "40px",
+    w: "100%",
+    h: ["150px", "200px", "300px"], // sm で 100px、md で 120px、lg で 150px
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
 };
