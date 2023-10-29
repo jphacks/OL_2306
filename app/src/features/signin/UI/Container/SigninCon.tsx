@@ -2,7 +2,6 @@ import type { FC, ChangeEvent, FormEvent } from 'react';
 import { SigninPre } from '../Presentational/SigninPre';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import axios from 'axios';
 
 export interface FormValues {
   email: string,
@@ -59,8 +58,8 @@ export const SigninCon:FC = () => {
         },
         body: JSON.stringify(
           {
-            "email": formValues.email,
-            "password": formValues.password,
+            'email': formValues.email,
+            'password': formValues.password,
           }
         )
       };
@@ -70,7 +69,7 @@ export const SigninCon:FC = () => {
     } catch(e) {
       console.log(e);
     }
-  }
+  };
 
   return <SigninPre handleChange={handleChange} handleSubmit={handleSubmit} formValues={formValues} formErrors={formErrors} />;
 };

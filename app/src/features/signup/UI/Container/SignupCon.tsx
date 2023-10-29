@@ -30,12 +30,6 @@ export const SignupCon:FC = () => {
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const postData = {
-    'user_name': formValues.username,
-    'email': formValues.email,
-    'password': formValues.password
-  };
-
   const validate = (values: FormValues) => {
     const errors: FormErrors = { username: '', email: '', password: '' };
     const regex = /^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/;
@@ -69,9 +63,9 @@ export const SignupCon:FC = () => {
         },
         body: JSON.stringify(
           {
-            "user_name": formValues.username,
-            "email": formValues.email,
-            "password": formValues.password,
+            'user_name': formValues.username,
+            'email': formValues.email,
+            'password': formValues.password,
           }
         )
       };
