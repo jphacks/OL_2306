@@ -34,7 +34,7 @@ export default async function handler(
 
     try {
       const result = await connection.query(
-        "INSERT INTO tweet (user_id, content, type) VALUES (?, ?, ?)",
+        "INSERT INTO tweet (user_id, content, type, image_path) VALUES (?, ?, ?, ?)",
         [userId, content, type, imagePath]
       );
 

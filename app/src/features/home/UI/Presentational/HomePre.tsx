@@ -1,10 +1,11 @@
-import { Layout } from '@/application/UI/Components/layout';
+import { Layout } from "@/application/UI/Components/layout";
 import {
   Box,
   Button,
   Flex,
   FormControl,
   Grid,
+  Input,
   Menu,
   MenuButton,
   MenuItem,
@@ -16,18 +17,18 @@ import {
   ModalOverlay,
   Text,
   Textarea,
-} from '@chakra-ui/react';
-import type { FC } from 'react';
-import React from 'react';
+} from "@chakra-ui/react";
+import type { FC } from "react";
+import React from "react";
 
-type ContentType = 'tweet' | 'model' | 'camera';
+type ContentType = "tweet" | "model" | "camera";
 
 type TweetType = {
   content: string;
   id: number;
   user_id: number;
   user_name: string;
-  type: 'tweet' | 'model' | 'camera';
+  type: "tweet" | "model" | "camera";
 };
 
 interface HomePreProps {
@@ -35,9 +36,11 @@ interface HomePreProps {
   content: string;
   type: ContentType;
   filteredTimeline: TweetType[];
+  imagePath: string;
+  setImagePath: (value: string) => void;
   onOpen: () => void;
   onClose: () => void;
-  handlePost: (content: string, type: string) => void;
+  handlePost: (content: string, type: string, imagePath: string) => void;
   setContent: (value: string) => void;
   setType: (value: ContentType) => void;
   getLabelForType: (type: string) => string;
@@ -53,6 +56,8 @@ export const HomePre: FC<HomePreProps> = ({
   content,
   type,
   filteredTimeline,
+  imagePath,
+  setImagePath,
   onOpen,
   onClose,
   handlePost,
@@ -69,8 +74,8 @@ export const HomePre: FC<HomePreProps> = ({
             mr={8}
             ml={2}
             cursor="pointer"
-            _hover={{ textDecoration: 'underline' }}
-            onClick={() => setFilteredType('tweet')}
+            _hover={{ textDecoration: "underline" }}
+            onClick={() => setFilteredType("tweet")}
           >
             つぶやき
           </Text>
@@ -78,8 +83,8 @@ export const HomePre: FC<HomePreProps> = ({
             mr={8}
             ml={2}
             cursor="pointer"
-            _hover={{ textDecoration: 'underline' }}
-            onClick={() => setFilteredType('model')}
+            _hover={{ textDecoration: "underline" }}
+            onClick={() => setFilteredType("model")}
           >
             モデル募集
           </Text>
@@ -87,8 +92,8 @@ export const HomePre: FC<HomePreProps> = ({
             mr={2}
             ml={2}
             cursor="pointer"
-            _hover={{ textDecoration: 'underline' }}
-            onClick={() => setFilteredType('camera')}
+            _hover={{ textDecoration: "underline" }}
+            onClick={() => setFilteredType("camera")}
           >
             撮影者募集
           </Text>
@@ -130,7 +135,7 @@ export const HomePre: FC<HomePreProps> = ({
         backgroundColor="transparent"
         border="1px solid gray"
         _hover={{
-          backgroundColor: 'gray.100',
+          backgroundColor: "gray.100",
         }}
         onClick={onOpen}
       >
@@ -149,16 +154,16 @@ export const HomePre: FC<HomePreProps> = ({
                 transition="all 0.2s"
                 borderRadius="md"
                 borderWidth="1px"
-                _hover={{ bg: 'gray.400' }}
-                _expanded={{ bg: 'blue.400' }}
-                _focus={{ boxShadow: 'outline' }}
+                _hover={{ bg: "gray.400" }}
+                _expanded={{ bg: "blue.400" }}
+                _focus={{ boxShadow: "outline" }}
               >
                 {getLabelForType(type)}
               </MenuButton>
               <MenuList>
-                <MenuItem onClick={() => setType('tweet')}>つぶやき</MenuItem>
-                <MenuItem onClick={() => setType('model')}>モデル募集</MenuItem>
-                <MenuItem onClick={() => setType('camera')}>
+                <MenuItem onClick={() => setType("tweet")}>つぶやき</MenuItem>
+                <MenuItem onClick={() => setType("model")}>モデル募集</MenuItem>
+                <MenuItem onClick={() => setType("camera")}>
                   撮影者募集
                 </MenuItem>
               </MenuList>
@@ -168,7 +173,7 @@ export const HomePre: FC<HomePreProps> = ({
                 value={content}
                 border="none"
                 placeholder="今何してる？"
-                _placeholder={{ color: 'gray.400' }}
+                _placeholder={{ color: "gray.400" }}
                 resize="vertical"
                 fontSize="20px"
                 h="200px"
@@ -176,6 +181,13 @@ export const HomePre: FC<HomePreProps> = ({
               />
             </FormControl>
           </ModalBody>
+          <FormControl mt={4}>
+            <Input
+              value={imagePath}
+              placeholder="画像のURL"
+              onChange={(e) => setImagePath(e.target.value)}
+            />
+          </FormControl>
           <Button
             mt={4}
             w="20%"
@@ -183,7 +195,7 @@ export const HomePre: FC<HomePreProps> = ({
             mr="10px"
             mb="10px"
             isDisabled={content.trim().length === 0}
-            onClick={() => handlePost(content, type)}
+            onClick={() => handlePost(content, type, imagePath)}
           >
             投稿
           </Button>
