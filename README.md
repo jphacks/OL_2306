@@ -47,6 +47,7 @@ UI・UXも工夫をして独自性を出していきたいです。
   * TypeScript
   * Next.js（バックエンド）
   * MySQL（データベース）
+  * Docker（開発環境）
 
 
 ## 開発技術
