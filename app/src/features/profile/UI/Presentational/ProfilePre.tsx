@@ -1,16 +1,17 @@
 import { Layout } from '@/application/UI/Components/layout';
 import { Avatar, Box, Button, Center, Grid, GridItem, HStack, IconButton, Image, Text, VStack } from '@chakra-ui/react';
 import type { FC } from 'react';
-import { IconContext } from 'react-icons';
-import { AiTwotoneSetting } from 'react-icons/ai';
-import type { GetProfileAPIResponse } from '../types/GetProfileAPIResponse';
+import type { GetProfileAPIResponse } from '../../types/GetProfileAPIResponse';
+import { SettingModal } from '../../Components/EditModal';
 
 interface ProfilePreProps {
+  userId: string
   userInfo: GetProfileAPIResponse
-    userFollower: number
-    userFollowed: number
+  userFollower: number
+  userFollowed: number
+  setUserInfo: (userInfo: GetProfileAPIResponse) => void
 }
-export const ProfilePre: FC<ProfilePreProps> = ({ userFollowed, userFollower, userInfo }) => {
+export const ProfilePre: FC<ProfilePreProps> = ({ userId, userInfo, userFollower, userFollowed, setUserInfo }) => {
   return <Layout title="フォトマ">
     <Box p={4}>
       <HStack justify='center' align='center'>
@@ -39,16 +40,7 @@ export const ProfilePre: FC<ProfilePreProps> = ({ userFollowed, userFollower, us
             </Box>
           </HStack>
         </VStack>
-        <Box p={10}>
-          <IconContext.Provider value={{ size: '2rem' }}>
-            <IconButton
-              aria-label="Settings"
-              icon={
-                <AiTwotoneSetting />
-              }
-            />
-          </IconContext.Provider>
-        </Box>
+        <SettingModal userId={userId} userInfo={userInfo} setUserInfo={setUserInfo} />
       </HStack>
       <Center py={4}>
         <Text>
