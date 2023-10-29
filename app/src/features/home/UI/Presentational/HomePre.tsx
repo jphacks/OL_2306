@@ -181,24 +181,26 @@ export const HomePre: FC<HomePreProps> = ({
               />
             </FormControl>
           </ModalBody>
-          <FormControl mt={4}>
-            <Input
-              value={imagePath}
-              placeholder="画像のURL"
-              onChange={(e) => setImagePath(e.target.value)}
-            />
-          </FormControl>
-          <Button
-            mt={4}
-            w="20%"
-            ml="auto"
-            mr="10px"
-            mb="10px"
-            isDisabled={content.trim().length === 0}
-            onClick={() => handlePost(content, type, imagePath)}
-          >
-            投稿
-          </Button>
+          <Flex mt={4} justifyContent="space-between" alignItems="center">
+            <FormControl flex="1" ml={4} mb="10px" mt={4}>
+              <Input
+                value={imagePath}
+                placeholder="画像のURL"
+                onChange={(e) => setImagePath(e.target.value)}
+              />
+            </FormControl>
+            <Button
+              w="20%"
+              mt={4}
+              ml={4}
+              mr="10px"
+              mb="10px"
+              isDisabled={content.trim().length === 0}
+              onClick={() => handlePost(content, type, imagePath)}
+            >
+              投稿
+            </Button>
+          </Flex>
         </ModalContent>
       </Modal>
     </Layout>
