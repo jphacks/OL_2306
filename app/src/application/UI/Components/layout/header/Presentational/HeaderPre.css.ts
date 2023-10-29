@@ -2,7 +2,9 @@ import { css } from '@emotion/react';
 
 export const headerStyle = css`
   width: 100vw;
-  background-color: #d6620e;
+  background-color: white;
+  border-top: 8px solid #f5f5f5;
+  border-bottom: 1px solid #e0e0e0;
   padding: 10px 17.5px;
   display: flex;
   justify-content: center;
@@ -13,7 +15,6 @@ export const headerStyle = css`
 `;
 
 export const headerIconText = css`
-  color: white;
-  font-size: 5vw;
+  color: black;
   flex: 1;
 `;
