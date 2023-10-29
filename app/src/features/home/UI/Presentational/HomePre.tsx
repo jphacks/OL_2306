@@ -6,6 +6,7 @@ import {
   FormControl,
   Grid,
   Input,
+  Link,
   Menu,
   MenuButton,
   MenuItem,
@@ -97,11 +98,11 @@ export const HomePre: FC<HomePreProps> = ({
               onClick={() => openDetailModal(item)}
             >
               <Box {...styles.cardImage}>
-                {item.image_path && (
-                  <img src={item.image_path} alt="投稿画像" {...styles.image} />
-                )}
+                <img src={`/images/${item.id}.png`} alt="投稿画像" {...styles.image} />
               </Box>
-              <p>{item.user_name}</p>
+              <Link href={`/profile/${item.id}`}>
+                <p>{item.user_name}</p>
+              </Link>
               <p>{item.content}</p>
             </Box>
           ))}
@@ -166,7 +167,7 @@ export const HomePre: FC<HomePreProps> = ({
               <>
                 <Box {...styles.detailModalImage}>
                   <img
-                    src={selectedItem.image_path}
+                    src={`/images/${selectedItem.id}.png`}
                     alt="投稿画像"
                     {...styles.image}
                   />

@@ -10,9 +10,11 @@ create table users (
 
 -- ユーザーの初期データ追加
 insert into users (user_name, email, password, icon_path) values 
-('hoge', 'hoge@email.com', SHA2('password', 256), ''), -- パスワードをハッシュ化して保存
-('fuga', 'fuga@email.com', 'password', '/public/image/icon/02.png'), -- アイコンのURL保存する場合
-('foo', 'foo@email.com', 'password', '');
+('Yusuke', 'tanaka@email.com', SHA2('password', 256), ''), -- パスワードをハッシュ化して保存
+('toku', 'toto@email.com', 'password', '/public/image/2.png'), -- アイコンのURL保存する場合
+('Umi', 'umiumi@email.com', 'password', ''),
+('Lucky', 'Lucky@email.com', 'password', ''),
+('Kazuki', 'kazu@email.com', 'password', '');
 
 -- ユーザーのポートフォリオ画像テーブル
 create table user_portfolios (
@@ -24,9 +26,11 @@ create table user_portfolios (
 
 -- 画像の登録
 insert into user_portfolios (user_id, image_path) values
-(1, '/public/image/portfolios/01-01.png'),
-(1, '/public/image/portfolios/01-02.png'),
-(2, '/public/image/portfolios/02-01.png');
+(1, 'public/image/1.png'),
+(2, 'public/image/2.png'),
+(3, 'public/image/3.png'),
+(4, 'public/image/4.png'),
+(5, 'public/image/5.png');
 
 -- 投稿テーブル
 create table tweet (
@@ -43,9 +47,11 @@ create table tweet (
 
 -- 投稿の追加
 insert into tweet (user_id, content) values
-(1, 'hello world!!'),
-(2, 'hoge hage boke!!'),
-(1, 'こんにちわ');
+(1, 'カメラマンを探しています'),
+(2, '花束!'),
+(3, 'モデルになってください!'),
+(4, 'こんな写真を撮っています'),
+(5, '写真の技術をあげたいです');
 
 -- 投稿の画像のテーブル
 create table tweet_images (
@@ -57,9 +63,11 @@ create table tweet_images (
 
 -- 投稿の画像の追加
 insert into tweet_images (tweet_id, image_path) values
-(1, '/public/images/tweet/01-01.png'),
-(1, '/public/images/tweet/01-02.png'),
-(2, '/public/images/tweet/02-01.png');
+(1, '/public/images/1.png'),
+(2, '/public/images/2.png'),
+(3, '/public/images/3.png'),
+(4, '/public/images/4.png'),
+(5, '/public/images/5.png');
 
 /* 
 以下のように投稿と画像をまとめて取得できたりする
