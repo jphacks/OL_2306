@@ -42,8 +42,11 @@
 * 
 
 #### フレームワーク・ライブラリ・モジュール
-* 
-* 
+* Next.js
+* TypeScript
+* Chakra UI
+* MySQL
+* Docker
 
 #### デバイス
 * 
