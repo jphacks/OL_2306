@@ -58,7 +58,7 @@ export const SignupCon:FC = () => {
     e.preventDefault();
     const errorCheck = validate(formValues);
     setFormErrors(errorCheck);
-    if (errorCheck.email != "" || errorCheck.username != "" || errorCheck.password != "" ) {
+    if (errorCheck.username !== "" || errorCheck.email !== "" || errorCheck.password !== "" ) {
       return ;
     }
     try {
