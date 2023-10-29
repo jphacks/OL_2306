@@ -91,7 +91,7 @@ export const HomePre: FC<HomePreProps> = ({
           </Text>
         </Flex>
         <Grid {...styles.gridContainer}>
-          {filteredTimeline.map((item, index) => (
+          {filteredTimeline.map((item) => (
             <Box
               key={item.id}
               {...styles.card}
