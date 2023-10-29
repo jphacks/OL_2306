@@ -64,8 +64,11 @@ export const SigninCon:FC = () => {
         )
       };
       const res = await fetch(url, options);
-      console.log(res);
-      router.push('/'); 
+      const json = await res.json()
+      console.log(json.message);
+      if (json.contents.length > 0) {
+        router.push('/'); 
+      }
     } catch(e) {
       console.log(e);
     }
