@@ -14,6 +14,7 @@ type TweetType = {
   user_id: number;
   user_name: string;
   type: "tweet" | "model" | "camera";
+  image_path: string;
 };
 
 export const HomeCon: FC = () => {

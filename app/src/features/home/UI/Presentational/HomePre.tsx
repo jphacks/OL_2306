@@ -29,6 +29,7 @@ type TweetType = {
   user_id: number;
   user_name: string;
   type: "tweet" | "model" | "camera";
+  image_path: string;
 };
 
 interface HomePreProps {
@@ -116,7 +117,17 @@ export const HomePre: FC<HomePreProps> = ({
                 alignItems="center"
                 justifyContent="center"
               >
-                画像
+                {item.image_path && (
+                  <img
+                    src={item.image_path}
+                    alt="投稿画像"
+                    style={{
+                      width: "auto",
+                      height: "100%",
+                      objectFit: "contain",
+                    }}
+                  />
+                )}
               </Box>
               <p>{item.user_name}</p>
               <p>{item.content}</p>
