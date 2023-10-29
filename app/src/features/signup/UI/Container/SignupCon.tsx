@@ -70,7 +70,8 @@ export const SignupCon:FC = () => {
         )
       };
       const res = await fetch(url, options);
-      console.log(res);
+      const json = await res.json()
+      console.log(json);
       router.push('/'); 
     } catch(e) {
       console.log(e);
