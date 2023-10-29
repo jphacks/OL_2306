@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import { ProfilePre } from '../Presentational/ProfilePre';
-import type { GetProfileAPIResponse } from '../types/GetProfileAPIResponse';
+import type { GetProfileAPIResponse } from '../../types/GetProfileAPIResponse';
 
 interface ProfileConProps {
   userId: string | string[] | undefined
@@ -37,5 +37,8 @@ export const ProfileCon: FC<ProfileConProps> = ({ userId: uid }) => {
   }, [userId]);
 
   // follow数、follower数は とりあえず仮で1100, 100
-  return <ProfilePre userInfo={userInfo} userFollowed={1100} userFollower={100} />;
+  return <ProfilePre userId={userId}
+    userInfo={userInfo} userFollowed={1100} userFollower={100}
+    setUserInfo={setUserInfo}
+  />;
 };
