@@ -62,6 +62,31 @@ UI・UXも工夫をして独自性を出していきたいです。
 * MySQL
 * Docker
 
+```mermaid
+flowchart
+
+subgraph GC[Docker]
+    OU[User]
+    subgraph GV[Next.js]
+        subgraph GS1[Frontend]
+            NW1{{"React"}}
+        end
+        subgraph GS2[Backend]
+            CP1("Next.js")
+        end
+    end
+    subgraph GS3[Database]
+        ST1[("MySQL")]
+    end
+end
+
+OU --> GS1
+GS1 --> GS2
+GS2 --> GS3
+GS2 --> GS1
+GS3 --> GS2
+```
+
 #### デバイス
 * 
 * 
