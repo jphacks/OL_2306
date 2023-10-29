@@ -6,6 +6,7 @@ import {
   FormControl,
   Grid,
   Input,
+  Link,
   Menu,
   MenuButton,
   MenuItem,
@@ -46,6 +47,10 @@ interface HomePreProps {
   setType: (value: ContentType) => void;
   getLabelForType: (type: string) => string;
   setFilteredType: (type: ContentType) => void;
+  isDetailModalOpen: boolean;
+  selectedItem: TweetType | null;
+  openDetailModal: (item: TweetType) => void;
+  closeDetailModal: () => void;
 }
 
 /**
@@ -66,6 +71,10 @@ export const HomePre: FC<HomePreProps> = ({
   setType,
   getLabelForType,
   setFilteredType,
+  isDetailModalOpen,
+  selectedItem,
+  openDetailModal,
+  closeDetailModal,
 }) => {
   return (
     <Layout title="フォトマ">
@@ -83,13 +92,17 @@ export const HomePre: FC<HomePreProps> = ({
         </Flex>
         <Grid {...styles.gridContainer}>
           {filteredTimeline.map((item) => (
-            <Box key={item.id} {...styles.card}>
+            <Box
+              key={item.id}
+              {...styles.card}
+              onClick={() => openDetailModal(item)}
+            >
               <Box {...styles.cardImage}>
-                {item.image_path && (
-                  <img src={item.image_path} alt="投稿画像" {...styles.image} />
-                )}
+                <img src={`/images/${item.id}.png`} alt="投稿画像" {...styles.image} />
               </Box>
-              <p>{item.user_name}</p>
+              <Link href={`/profile/${item.id}`}>
+                <p>{item.user_name}</p>
+              </Link>
               <p>{item.content}</p>
             </Box>
           ))}
@@ -141,6 +154,38 @@ export const HomePre: FC<HomePreProps> = ({
               投稿
             </Button>
           </Flex>
+        </ModalContent>
+      </Modal>
+
+      {/* 詳細モーダル */}
+      <Modal isOpen={isDetailModalOpen} onClose={closeDetailModal}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalCloseButton />
+          <ModalBody>
+            {selectedItem && (
+              <>
+                <Box {...styles.detailModalImage}>
+                  <img
+                    src={`/images/${selectedItem.id}.png`}
+                    alt="投稿画像"
+                    {...styles.image}
+                  />
+                </Box>
+                <p
+                  style={{
+                    marginTop: '8px',
+                    marginBottom: '8px',
+                  }}
+                >
+                  {selectedItem.user_name}
+                </p>
+                <p style={{ marginTop: '8px', marginBottom: '10px' }}>
+                  {selectedItem.content}
+                </p>
+              </>
+            )}
+          </ModalBody>
         </ModalContent>
       </Modal>
     </Layout>
@@ -231,5 +276,14 @@ const styles = {
     ml: 4,
     mr: '10px',
     mb: '10px',
+  },
+  detailModalImage: {
+    bg: 'gray.300',
+    marginTop: '40px',
+    w: '100%',
+    h: ['150px', '200px', '300px'], // sm で 100px、md で 120px、lg で 150px
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 };

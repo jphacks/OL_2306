@@ -21,10 +21,21 @@ export const HomeCon: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [content, setContent] = useState('');
   const [imagePath, setImagePath] = useState('');
+  const [isDetailModalOpen, setDetailModalOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<TweetType | null>(null);
   const [type, setType] = useState<'tweet' | 'model' | 'camera'>('tweet');
   const [timeline, setTimeline] = useState<Array<TweetType>>([]);
   const [filteredType, setFilteredType] = useState<TweetType['type']>('tweet');
   const [refreshKey, setRefreshKey] = useState(0); //ページレンダリングのためのカウントキー
+
+  const openDetailModal = (item: TweetType) => {
+    setSelectedItem(item);
+    setDetailModalOpen(true);
+  };
+
+  const closeDetailModal = () => {
+    setDetailModalOpen(false);
+  };
 
   const onClose = () => {
     setIsOpen(false);
@@ -118,6 +129,10 @@ export const HomeCon: FC = () => {
       setType={setType}
       getLabelForType={getLabelForType}
       setFilteredType={setFilteredType}
+      isDetailModalOpen={isDetailModalOpen}
+      selectedItem={selectedItem}
+      openDetailModal={openDetailModal}
+      closeDetailModal={closeDetailModal}
       onOpen={onOpen}
       onClose={onClose}
     />
