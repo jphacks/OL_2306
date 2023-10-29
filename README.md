@@ -61,7 +61,7 @@ UI・UXも工夫をして独自性を出していきたいです。
   * MySQL（データベース）
   * Docker（開発環境）
 * GitHub ActionsでCIを組んでコードの質を一定に保つようにしています。
-
+* [画面設計](https://www.figma.com/file/EpPNV8hfaTAp8TC4DD6Rhe/JPHACKS?type=design&node-id=0%3A1&mode=design&t=AhnV3PW7tEgqevFa-1)
 
 ## 開発技術
 ### 活用した技術
