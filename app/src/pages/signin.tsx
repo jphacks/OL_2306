@@ -1,8 +1,8 @@
-import { SigninForm } from '@/features/signin/SigninForm';
+import { SigninCon } from '@/features/signin/UI/Container/SigninCon';
 import type { NextPage } from 'next';
 
 const Signin:NextPage = () => {
-  return <SigninForm />;
+  return <SigninCon />;
 };
 
 export default Signin;
