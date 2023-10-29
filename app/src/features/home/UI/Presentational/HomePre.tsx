@@ -1,7 +1,10 @@
 import { Layout } from "@/application/UI/Components/layout";
 import {
+  Box,
   Button,
+  Flex,
   FormControl,
+  Grid,
   Menu,
   MenuButton,
   MenuItem,
@@ -11,9 +14,9 @@ import {
   ModalCloseButton,
   ModalContent,
   ModalOverlay,
+  Text,
   Textarea,
 } from "@chakra-ui/react";
-import { Box, Flex, Grid, Text } from "@chakra-ui/react";
 import type { FC } from "react";
 import React from "react";
 
@@ -29,16 +32,15 @@ type TweetType = {
 
 interface HomePreProps {
   isOpen: boolean;
+  content: string;
+  type: ContentType;
+  filteredTimeline: TweetType[];
   onOpen: () => void;
   onClose: () => void;
   handlePost: (content: string, type: string) => void;
-  content: string;
   setContent: (value: string) => void;
-  type: ContentType;
   setType: (value: ContentType) => void;
   getLabelForType: (type: string) => string;
-  timeline: TweetType[];
-  filteredType: ContentType;
   setFilteredType: (type: ContentType) => void;
 }
 
@@ -48,22 +50,17 @@ interface HomePreProps {
  */
 export const HomePre: FC<HomePreProps> = ({
   isOpen,
+  content,
+  type,
+  filteredTimeline,
   onOpen,
   onClose,
   handlePost,
-  content,
   setContent,
-  type,
   setType,
   getLabelForType,
-  timeline,
-  filteredType,
   setFilteredType,
 }) => {
-  const filteredTimeline = timeline.filter(
-    (item) => item.type === filteredType
-  );
-
   return (
     <Layout title="フォトマ">
       <Box margin="20px 50px">

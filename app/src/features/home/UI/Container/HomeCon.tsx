@@ -59,6 +59,10 @@ export const HomeCon: FC = () => {
     }
   };
 
+  const filteredTimeline = timeline.filter(
+    (item) => item.type === filteredType
+  );
+
   //typeを日本語に変換するヘルパー関数
   const getLabelForType = (type: string) => {
     switch (type) {
@@ -94,16 +98,15 @@ export const HomeCon: FC = () => {
   return (
     <HomePre
       isOpen={isOpen}
-      handlePost={handlePost}
       content={content}
-      setContent={setContent}
       type={type}
-      setType={setType}
-      getLabelForType={getLabelForType}
+      filteredTimeline={filteredTimeline}
       onOpen={onOpen}
       onClose={onClose}
-      timeline={timeline}
-      filteredType={filteredType}
+      handlePost={handlePost}
+      setContent={setContent}
+      setType={setType}
+      getLabelForType={getLabelForType}
       setFilteredType={setFilteredType}
     />
   );
