@@ -25,6 +25,7 @@ export const HomeCon: FC = () => {
 
   const onClose = () => {
     setIsOpen(false);
+    setContent("");
     setType("tweet");
   };
 

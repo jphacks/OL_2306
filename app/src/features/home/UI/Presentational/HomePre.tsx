@@ -17,6 +17,16 @@ import { Box, Flex, Grid, Text } from "@chakra-ui/react";
 import type { FC } from "react";
 import React from "react";
 
+type ContentType = "tweet" | "model" | "camera";
+
+type TweetType = {
+  content: string;
+  id: number;
+  user_id: number;
+  user_name: string;
+  type: "tweet" | "model" | "camera";
+};
+
 interface HomePreProps {
   isOpen: boolean;
   onOpen: () => void;
@@ -24,18 +34,12 @@ interface HomePreProps {
   handlePost: (content: string, type: string) => void;
   content: string;
   setContent: (value: string) => void;
-  type: "tweet" | "model" | "camera";
-  setType: (value: "tweet" | "model" | "camera") => void;
+  type: ContentType;
+  setType: (value: ContentType) => void;
   getLabelForType: (type: string) => string;
-  timeline: Array<{
-    content: string;
-    id: number;
-    user_id: number;
-    user_name: string;
-    type: "tweet" | "model" | "camera";
-  }>;
-  filteredType: "tweet" | "model" | "camera";
-  setFilteredType: (type: "tweet" | "model" | "camera") => void;
+  timeline: TweetType[];
+  filteredType: ContentType;
+  setFilteredType: (type: ContentType) => void;
 }
 
 /**
