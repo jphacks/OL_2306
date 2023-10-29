@@ -169,6 +169,7 @@ export const HomePre: FC<HomePreProps> = ({
             ml="auto"
             mr="10px"
             mb="10px"
+            isDisabled={content.trim().length === 0}
             onClick={() => handlePost(content, type)}
           >
             投稿
