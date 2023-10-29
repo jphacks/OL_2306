@@ -12,7 +12,7 @@ interface ProfilePreProps {
   setUserInfo: (userInfo: GetProfileAPIResponse) => void
 }
 export const ProfilePre: FC<ProfilePreProps> = ({ userId, userInfo, userFollower, userFollowed, setUserInfo }) => {
-  let rand: number[] = [];
+  const rand: number[] = [];
   for (let i = 0; i < 30; i++) {
     rand[i] = Math.floor(Math.random() * 20);
     Math.random();
