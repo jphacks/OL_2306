@@ -71,62 +71,22 @@ export const HomePre: FC<HomePreProps> = ({
     <Layout title="フォトマ">
       <Box margin="20px 50px">
         <Flex justifyContent="flex-end" mt={10} mb={10}>
-          <Text
-            mr={8}
-            ml={2}
-            cursor="pointer"
-            _hover={{ textDecoration: "underline" }}
-            onClick={() => setFilteredType("tweet")}
-          >
+          <Text {...styles.menu} onClick={() => setFilteredType("tweet")}>
             つぶやき
           </Text>
-          <Text
-            mr={8}
-            ml={2}
-            cursor="pointer"
-            _hover={{ textDecoration: "underline" }}
-            onClick={() => setFilteredType("model")}
-          >
+          <Text {...styles.menu} onClick={() => setFilteredType("model")}>
             モデル募集
           </Text>
-          <Text
-            mr={2}
-            ml={2}
-            cursor="pointer"
-            _hover={{ textDecoration: "underline" }}
-            onClick={() => setFilteredType("camera")}
-          >
+          <Text {...styles.menu} onClick={() => setFilteredType("camera")}>
             撮影者募集
           </Text>
         </Flex>
         <Grid templateColumns="repeat(4, 1fr)" gap={4}>
           {filteredTimeline.map((item) => (
-            <Box
-              key={item.id}
-              w="100%"
-              p={4}
-              boxShadow="sm"
-              borderWidth="1px"
-              borderRadius="5px"
-            >
-              <Box
-                bg="gray.300"
-                w="100%"
-                h="150px"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-              >
+            <Box key={item.id} {...styles.card}>
+              <Box {...styles.cardImage}>
                 {item.image_path && (
-                  <img
-                    src={item.image_path}
-                    alt="投稿画像"
-                    style={{
-                      width: "auto",
-                      height: "100%",
-                      objectFit: "contain",
-                    }}
-                  />
+                  <img src={item.image_path} alt="投稿画像" {...styles.image} />
                 )}
               </Box>
               <p>{item.user_name}</p>
@@ -136,20 +96,7 @@ export const HomePre: FC<HomePreProps> = ({
         </Grid>
       </Box>
 
-      <Button
-        position="fixed"
-        width="50px"
-        height="50px"
-        right="50px"
-        bottom="50px"
-        borderRadius="50%"
-        backgroundColor="transparent"
-        border="1px solid gray"
-        _hover={{
-          backgroundColor: "gray.100",
-        }}
-        onClick={onOpen}
-      >
+      <Button {...styles.addButton} onClick={onOpen}>
         +
       </Button>
 
@@ -159,16 +106,7 @@ export const HomePre: FC<HomePreProps> = ({
           <ModalCloseButton />
           <ModalBody pb={6}>
             <Menu>
-              <MenuButton
-                px={4}
-                py={2}
-                transition="all 0.2s"
-                borderRadius="md"
-                borderWidth="1px"
-                _hover={{ bg: "gray.400" }}
-                _expanded={{ bg: "blue.400" }}
-                _focus={{ boxShadow: "outline" }}
-              >
+              <MenuButton {...styles.ModalButton}>
                 {getLabelForType(type)}
               </MenuButton>
               <MenuList>
@@ -182,18 +120,13 @@ export const HomePre: FC<HomePreProps> = ({
             <FormControl mt={4}>
               <Textarea
                 value={content}
-                border="none"
-                placeholder="今何してる？"
-                _placeholder={{ color: "gray.400" }}
-                resize="vertical"
-                fontSize="20px"
-                h="200px"
+                {...styles.ModalText}
                 onChange={(e) => setContent(e.target.value)}
               />
             </FormControl>
           </ModalBody>
-          <Flex mt={4} justifyContent="space-between" alignItems="center">
-            <FormControl flex="1" ml={4} mb="10px" mt={4}>
+          <Flex {...styles.ModalContainer}>
+            <FormControl {...styles.ModalUrl}>
               <Input
                 value={imagePath}
                 placeholder="画像のURL"
@@ -201,11 +134,7 @@ export const HomePre: FC<HomePreProps> = ({
               />
             </FormControl>
             <Button
-              w="20%"
-              mt={4}
-              ml={4}
-              mr="10px"
-              mb="10px"
+              {...styles.ModalSubmitButton}
               isDisabled={content.trim().length === 0}
               onClick={() => handlePost(content, type, imagePath)}
             >
@@ -216,4 +145,84 @@ export const HomePre: FC<HomePreProps> = ({
       </Modal>
     </Layout>
   );
+};
+
+const styles = {
+  menu: {
+    mr: 8,
+    ml: 2,
+    cursor: "pointer",
+    _hover: { textDecoration: "underline" },
+  },
+  card: {
+    w: "100%",
+    p: 4,
+    boxShadow: "sm",
+    borderWidth: "1px",
+    borderRadius: "5px",
+  },
+  cardImage: {
+    bg: "gray.300",
+    w: "100%",
+    h: "150px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  image: {
+    style: {
+      width: "auto",
+      height: "100%",
+      objectFit: "contain" as const,
+    },
+  },
+  addButton: {
+    position: "fixed" as const,
+    width: "50px",
+    height: "50px",
+    right: "50px",
+    bottom: "50px",
+    borderRadius: "50%",
+    backgroundColor: "transparent",
+    border: "1px solid gray",
+    _hover: {
+      backgroundColor: "gray.100",
+    },
+  },
+  ModalButton: {
+    px: 4,
+    py: 2,
+    transition: "all 0.2s",
+    borderRadius: "md",
+    borderWidth: "1px",
+    _hover: { bg: "gray.400" },
+    _expanded: { bg: "blue.400" },
+    _focus: { boxShadow: "outline" },
+  },
+  ModalText: {
+    border: "none",
+    placeholder: "今何してる？",
+    _placeholde: { color: "gray.400" },
+    resize: "vertical" as const,
+    fontSize: "20px",
+    h: "200px",
+  },
+  ModalContainer: {
+    mt: 4,
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  ModalUrl: {
+    flex: "1",
+    ml: 4,
+    mb: "10px",
+    mt: 4,
+  },
+  ModalSubmitButton: {
+    w: "20%",
+    mt: 4,
+    ml: 4,
+    mr: "10px",
+    mb: "10px",
+  },
 };
