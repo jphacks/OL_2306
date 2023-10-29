@@ -22,6 +22,7 @@ export const HomeCon: FC = () => {
   const [type, setType] = useState<"tweet" | "model" | "camera">("tweet");
   const [timeline, setTimeline] = useState<Array<TweetType>>([]);
   const [filteredType, setFilteredType] = useState<TweetType["type"]>("tweet");
+  const [refreshKey, setRefreshKey] = useState(0); //ページレンダリングのためのカウントキー
 
   const onClose = () => {
     setIsOpen(false);
@@ -47,6 +48,7 @@ export const HomeCon: FC = () => {
 
       if (response.ok) {
         console.log("Posted successfully:", data);
+        setRefreshKey((prev) => prev + 1);
       } else {
         console.error("Error posting tweet:", data.message);
       }
@@ -93,7 +95,7 @@ export const HomeCon: FC = () => {
     }
 
     fetchTimeline();
-  }, []);
+  }, [refreshKey]);
 
   return (
     <HomePre
