@@ -1,4 +1,4 @@
-import { Layout } from "@/application/UI/Components/layout";
+import { Layout } from '@/application/UI/Components/layout';
 import {
   Box,
   Button,
@@ -6,7 +6,6 @@ import {
   FormControl,
   Grid,
   Input,
-  Link,
   Menu,
   MenuButton,
   MenuItem,
@@ -18,18 +17,18 @@ import {
   ModalOverlay,
   Text,
   Textarea,
-} from "@chakra-ui/react";
-import type { FC } from "react";
-import React from "react";
+} from '@chakra-ui/react';
+import type { FC } from 'react';
+import React from 'react';
 
-type ContentType = "tweet" | "model" | "camera";
+type ContentType = 'tweet' | 'model' | 'camera';
 
 type TweetType = {
   content: string;
   id: number;
   user_id: number;
   user_name: string;
-  type: "tweet" | "model" | "camera";
+  type: 'tweet' | 'model' | 'camera';
   image_path: string;
 };
 
@@ -80,13 +79,13 @@ export const HomePre: FC<HomePreProps> = ({
     <Layout title="フォトマ">
       <Box {...styles.home}>
         <Flex justifyContent="flex-end" mt={10} mb={10}>
-          <Text {...styles.menu} onClick={() => setFilteredType("tweet")}>
+          <Text {...styles.menu} onClick={() => setFilteredType('tweet')}>
             つぶやき
           </Text>
-          <Text {...styles.menu} onClick={() => setFilteredType("model")}>
+          <Text {...styles.menu} onClick={() => setFilteredType('model')}>
             モデル募集
           </Text>
-          <Text {...styles.menu} onClick={() => setFilteredType("camera")}>
+          <Text {...styles.menu} onClick={() => setFilteredType('camera')}>
             撮影者募集
           </Text>
         </Flex>
@@ -123,9 +122,9 @@ export const HomePre: FC<HomePreProps> = ({
                 {getLabelForType(type)}
               </MenuButton>
               <MenuList>
-                <MenuItem onClick={() => setType("tweet")}>つぶやき</MenuItem>
-                <MenuItem onClick={() => setType("model")}>モデル募集</MenuItem>
-                <MenuItem onClick={() => setType("camera")}>
+                <MenuItem onClick={() => setType('tweet')}>つぶやき</MenuItem>
+                <MenuItem onClick={() => setType('model')}>モデル募集</MenuItem>
+                <MenuItem onClick={() => setType('camera')}>
                   撮影者募集
                 </MenuItem>
               </MenuList>
@@ -174,13 +173,13 @@ export const HomePre: FC<HomePreProps> = ({
                 </Box>
                 <p
                   style={{
-                    marginTop: "8px",
-                    marginBottom: "8px",
+                    marginTop: '8px',
+                    marginBottom: '8px',
                   }}
                 >
                   {selectedItem.user_name}
                 </p>
-                <p style={{ marginTop: "8px", marginBottom: "10px" }}>
+                <p style={{ marginTop: '8px', marginBottom: '10px' }}>
                   {selectedItem.content}
                 </p>
               </>
@@ -194,96 +193,96 @@ export const HomePre: FC<HomePreProps> = ({
 
 const styles = {
   home: {
-    margin: ["10px 25px", "15px 35px", "20px 50px"], // sm で "10px 25px"、md で "15px 35px"、lg で "20px 50px"
+    margin: ['10px 25px', '15px 35px', '20px 50px'], // sm で "10px 25px"、md で "15px 35px"、lg で "20px 50px"
   },
   gridContainer: {
-    templateColumns: ["repeat(2, 1fr)", "repeat(3, 1fr)", "repeat(4, 1fr)"], // sm で 2 列、md で 3 列、lg 以降で 4 列
+    templateColumns: ['repeat(2, 1fr)', 'repeat(3, 1fr)', 'repeat(4, 1fr)'], // sm で 2 列、md で 3 列、lg 以降で 4 列
     gap: 4,
   },
   menu: {
     mr: 8,
     ml: 2,
-    cursor: "pointer",
-    _hover: { textDecoration: "underline" },
+    cursor: 'pointer',
+    _hover: { textDecoration: 'underline' },
   },
   card: {
-    w: "100%",
+    w: '100%',
     p: 4,
-    boxShadow: "sm",
-    borderWidth: "1px",
-    borderRadius: "5px",
+    boxShadow: 'sm',
+    borderWidth: '1px',
+    borderRadius: '5px',
   },
   cardImage: {
-    bg: "gray.300",
-    w: "100%",
-    h: ["60px", "120px", "150px"], // sm で 100px、md で 120px、lg で 150px
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    bg: 'gray.300',
+    w: '100%',
+    h: ['60px', '120px', '150px'], // sm で 100px、md で 120px、lg で 150px
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   image: {
     style: {
-      width: "auto",
-      height: "100%",
-      objectFit: "contain" as const,
+      width: 'auto',
+      height: '100%',
+      objectFit: 'contain' as const,
     },
   },
   addButton: {
-    position: "fixed" as const,
-    width: "50px",
-    height: "50px",
-    right: "50px",
-    bottom: "50px",
-    borderRadius: "50%",
-    backgroundColor: "transparent",
-    border: "1px solid gray",
+    position: 'fixed' as const,
+    width: '50px',
+    height: '50px',
+    right: '50px',
+    bottom: '50px',
+    borderRadius: '50%',
+    backgroundColor: 'transparent',
+    border: '1px solid gray',
     _hover: {
-      backgroundColor: "gray.100",
+      backgroundColor: 'gray.100',
     },
   },
   ModalButton: {
     px: 4,
     py: 2,
-    transition: "all 0.2s",
-    borderRadius: "md",
-    borderWidth: "1px",
-    _hover: { bg: "gray.400" },
-    _expanded: { bg: "blue.400" },
-    _focus: { boxShadow: "outline" },
+    transition: 'all 0.2s',
+    borderRadius: 'md',
+    borderWidth: '1px',
+    _hover: { bg: 'gray.400' },
+    _expanded: { bg: 'blue.400' },
+    _focus: { boxShadow: 'outline' },
   },
   ModalText: {
-    border: "none",
-    placeholder: "今何してる？",
-    _placeholde: { color: "gray.400" },
-    resize: "vertical" as const,
-    fontSize: "20px",
-    h: "200px",
+    border: 'none',
+    placeholder: '今何してる？',
+    _placeholde: { color: 'gray.400' },
+    resize: 'vertical' as const,
+    fontSize: '20px',
+    h: '200px',
   },
   ModalContainer: {
     mt: 4,
-    justifyContent: "space-between",
-    alignItems: "center",
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   ModalUrl: {
-    flex: "1",
+    flex: '1',
     ml: 4,
-    mb: "10px",
+    mb: '10px',
     mt: 4,
   },
   ModalSubmitButton: {
-    w: "20%",
+    w: '20%',
     mt: 4,
     ml: 4,
-    mr: "10px",
-    mb: "10px",
+    mr: '10px',
+    mb: '10px',
   },
   detailModalImage: {
-    bg: "gray.300",
-    marginTop: "40px",
-    w: "100%",
-    h: ["150px", "200px", "300px"], // sm で 100px、md で 120px、lg で 150px
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    bg: 'gray.300',
+    marginTop: '40px',
+    w: '100%',
+    h: ['150px', '200px', '300px'], // sm で 100px、md で 120px、lg で 150px
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 };
